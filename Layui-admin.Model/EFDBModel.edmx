@@ -1,0 +1,326 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="EFDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Ad">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ParentId" Type="int" />
+          <Property Name="Sorts" Type="int" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="EnName" Type="nvarchar" MaxLength="100" />
+          <Property Name="Width" Type="int" />
+          <Property Name="Height" Type="int" />
+          <Property Name="Url" Type="nvarchar" MaxLength="200" />
+          <Property Name="Pic" Type="nvarchar" MaxLength="200" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Contents" Type="nvarchar(max)" />
+          <Property Name="AddTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Admin_User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="NickName" Type="nvarchar" MaxLength="150" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" />
+          <Property Name="RealName" Type="nvarchar" MaxLength="150" />
+          <Property Name="PassWord" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="25" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="20" />
+          <Property Name="Sex" Type="int" Nullable="false" />
+          <Property Name="Photo" Type="nvarchar" MaxLength="100" />
+          <Property Name="Age" Type="int" Nullable="false" />
+          <Property Name="Brithday" Type="datetime" />
+          <Property Name="Introduce" Type="nvarchar" MaxLength="200" />
+          <Property Name="Country" Type="nvarchar" MaxLength="50" />
+          <Property Name="Province" Type="int" />
+          <Property Name="City" Type="int" />
+          <Property Name="Address" Type="nvarchar" MaxLength="250" />
+          <Property Name="LoginIp" Type="nvarchar" MaxLength="50" />
+          <Property Name="RoleID" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreateUserID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CreateUserName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifyUserID" Type="nvarchar" MaxLength="50" />
+          <Property Name="ModifyUserName" Type="nvarchar" MaxLength="50" />
+          <Property Name="UpdateDate" Type="datetime" />
+          <Property Name="DeleteMark" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="News">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Sorts" Type="int" />
+          <Property Name="ClassId" Type="int" />
+          <Property Name="Hot" Type="int" />
+          <Property Name="Tops" Type="int" />
+          <Property Name="ClickCount" Type="bigint" />
+          <Property Name="CommentCount" Type="bigint" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="SubName" Type="nvarchar" MaxLength="100" />
+          <Property Name="OutLink" Type="nvarchar" MaxLength="100" />
+          <Property Name="Author" Type="nvarchar" MaxLength="50" />
+          <Property Name="Froms" Type="nvarchar" MaxLength="50" />
+          <Property Name="Pic" Type="nvarchar" MaxLength="100" />
+          <Property Name="Tags" Type="nvarchar" MaxLength="200" />
+          <Property Name="DownloadFiles" Type="nvarchar" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Contents" Type="nvarchar(max)" />
+          <Property Name="MobContents" Type="nvarchar(max)" />
+          <Property Name="IsHidden" Type="int" />
+          <Property Name="AddTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="ProductID" />
+          </Key>
+          <Property Name="ProductID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Unit" Type="nvarchar" MaxLength="5" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+          <Property Name="Content" Type="text" />
+          <Property Name="CreateTime" Type="datetime" Nullable="false" />
+          <Property Name="UpdateTime" Type="datetime" />
+          <Property Name="Text1" Type="nvarchar" MaxLength="50" />
+          <Property Name="Text2" Type="nvarchar" MaxLength="50" />
+          <Property Name="Text3" Type="nvarchar" MaxLength="50" />
+          <Property Name="Text4" Type="nvarchar" MaxLength="50" />
+          <Property Name="Text5" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityContainer Name="EFDBModelStoreContainer">
+          <EntitySet Name="Ad" EntityType="Self.Ad" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Admin_User" EntityType="Self.Admin_User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="News" EntityType="Self.News" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EFDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Ad">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ParentId" Type="Int32" />
+          <Property Name="Sorts" Type="Int32" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="EnName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Width" Type="Int32" />
+          <Property Name="Height" Type="Int32" />
+          <Property Name="Url" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Pic" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Contents" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AddTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Admin_User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NickName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RealName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="PassWord" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Sex" Type="Int32" Nullable="false" />
+          <Property Name="Photo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Age" Type="Int32" Nullable="false" />
+          <Property Name="Brithday" Type="DateTime" Precision="3" />
+          <Property Name="Introduce" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Province" Type="Int32" />
+          <Property Name="City" Type="Int32" />
+          <Property Name="Address" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="LoginIp" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RoleID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreateUserID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CreateUserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifyUserID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ModifyUserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+          <Property Name="DeleteMark" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="News">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Sorts" Type="Int32" />
+          <Property Name="ClassId" Type="Int32" />
+          <Property Name="Hot" Type="Int32" />
+          <Property Name="Tops" Type="Int32" />
+          <Property Name="ClickCount" Type="Int64" />
+          <Property Name="CommentCount" Type="Int64" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="SubName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="OutLink" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Author" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Froms" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Pic" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Tags" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="DownloadFiles" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Contents" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MobContents" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsHidden" Type="Int32" />
+          <Property Name="AddTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityContainer Name="WebSiteTemplate1Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Ad" EntityType="Self.Ad" />
+          <EntitySet Name="Admin_User" EntityType="Self.Admin_User" />
+          <EntitySet Name="News" EntityType="Self.News" />
+          <EntitySet Name="Product" EntityType="EFDBModel.Product" />
+        </EntityContainer>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="ProductID" />
+          </Key>
+          <Property Name="ProductID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Unit" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdateTime" Type="DateTime" Precision="3" />
+          <Property Name="Text1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Text2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Text3" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Text4" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Text5" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="EFDBModelStoreContainer" CdmEntityContainer="WebSiteTemplate1Entities">
+    <EntitySetMapping Name="Ad">
+      <EntityTypeMapping TypeName="IsTypeOf(EFDBModel.Ad)">
+        <MappingFragment StoreEntitySet="Ad">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+          <ScalarProperty Name="Sorts" ColumnName="Sorts" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="EnName" ColumnName="EnName" />
+          <ScalarProperty Name="Width" ColumnName="Width" />
+          <ScalarProperty Name="Height" ColumnName="Height" />
+          <ScalarProperty Name="Url" ColumnName="Url" />
+          <ScalarProperty Name="Pic" ColumnName="Pic" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Contents" ColumnName="Contents" />
+          <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Admin_User">
+      <EntityTypeMapping TypeName="IsTypeOf(EFDBModel.Admin_User)">
+        <MappingFragment StoreEntitySet="Admin_User">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="NickName" ColumnName="NickName" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="RealName" ColumnName="RealName" />
+          <ScalarProperty Name="PassWord" ColumnName="PassWord" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Sex" ColumnName="Sex" />
+          <ScalarProperty Name="Photo" ColumnName="Photo" />
+          <ScalarProperty Name="Age" ColumnName="Age" />
+          <ScalarProperty Name="Brithday" ColumnName="Brithday" />
+          <ScalarProperty Name="Introduce" ColumnName="Introduce" />
+          <ScalarProperty Name="Country" ColumnName="Country" />
+          <ScalarProperty Name="Province" ColumnName="Province" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="LoginIp" ColumnName="LoginIp" />
+          <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+          <ScalarProperty Name="CreateUserID" ColumnName="CreateUserID" />
+          <ScalarProperty Name="CreateUserName" ColumnName="CreateUserName" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="ModifyUserID" ColumnName="ModifyUserID" />
+          <ScalarProperty Name="ModifyUserName" ColumnName="ModifyUserName" />
+          <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+          <ScalarProperty Name="DeleteMark" ColumnName="DeleteMark" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="News">
+      <EntityTypeMapping TypeName="IsTypeOf(EFDBModel.News)">
+        <MappingFragment StoreEntitySet="News">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Sorts" ColumnName="Sorts" />
+          <ScalarProperty Name="ClassId" ColumnName="ClassId" />
+          <ScalarProperty Name="Hot" ColumnName="Hot" />
+          <ScalarProperty Name="Tops" ColumnName="Tops" />
+          <ScalarProperty Name="ClickCount" ColumnName="ClickCount" />
+          <ScalarProperty Name="CommentCount" ColumnName="CommentCount" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="SubName" ColumnName="SubName" />
+          <ScalarProperty Name="OutLink" ColumnName="OutLink" />
+          <ScalarProperty Name="Author" ColumnName="Author" />
+          <ScalarProperty Name="Froms" ColumnName="Froms" />
+          <ScalarProperty Name="Pic" ColumnName="Pic" />
+          <ScalarProperty Name="Tags" ColumnName="Tags" />
+          <ScalarProperty Name="DownloadFiles" ColumnName="DownloadFiles" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Contents" ColumnName="Contents" />
+          <ScalarProperty Name="MobContents" ColumnName="MobContents" />
+          <ScalarProperty Name="IsHidden" ColumnName="IsHidden" />
+          <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+          <EntitySetMapping Name="Product">
+            <EntityTypeMapping TypeName="EFDBModel.Product">
+              <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="Text5" ColumnName="Text5" />
+                <ScalarProperty Name="Text4" ColumnName="Text4" />
+                <ScalarProperty Name="Text3" ColumnName="Text3" />
+                <ScalarProperty Name="Text2" ColumnName="Text2" />
+                <ScalarProperty Name="Text1" ColumnName="Text1" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Unit" ColumnName="Unit" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

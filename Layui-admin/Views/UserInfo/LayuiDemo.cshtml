@@ -1,0 +1,43 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/layui/css/layui.css" rel="stylesheet" />
+    <title>LayuiDemo</title>
+</head>
+<body>
+    <script src="~/Content/layui/layui.js"></script>
+    @*<script>
+        layui.config({
+            dir: '/res/layui/', //layui.js 所在路径（注意，如果是script单独引入layui.js，无需设定该参数。），一般情况下可以无视
+            version: false, //一般用于更新模块缓存，默认不开启。设为true即让浏览器不缓存。也可以设为一个固定的值，如：201610
+            debug: false, //用于开启调试模式，默认false，如果设为true，则JS模块的节点会保留在页面
+            base: '/Content/layui/res/js/modules/' //设定扩展的Layui模块的所在目录，一般用于外部模块扩展
+        });
+    </script>*@
+    @*<script>
+            //一般直接写在一个js文件中
+            layui.use(['layer', 'form'], function () {
+                var layer = layui.layer
+                    , form = layui.form;
+
+                layer.msg('Hello World');
+            });
+        </script>*@
+    layui.code
+    <script>
+        layui.config({
+            base: '/Content/layui/res/js/modules/' //你存放新模块的目录，注意，不是layui的模块目录
+        }).use('index'); //加载入口
+    </script>
+    <div>
+
+    </div>
+</body>
+</html>

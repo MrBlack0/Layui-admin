@@ -1,0 +1,584 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>后台主页Index</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="~/Content/layui/css/layui.css" media="all">
+    <script src="~/Content/js/echarts/echarts.js"></script>
+    <!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
+    <style>
+        .first-tab i.layui-tab-close {
+            display: none !important;
+        }
+
+        .layui-black-card-list {
+            padding: 15px;
+        }
+
+        .layui-black-badge {
+            top: 50%;
+            margin-top: -9px;
+            position: absolute;
+            right: 15px;
+        }
+
+        .layui-black-big-font {
+            font-size: 36px;
+            color: #666;
+            line-height: 36px;
+            padding: 5px 0 10px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            word-break: break-all;
+            white-space: nowrap;
+        }
+
+        .layui-black-span-clor {
+            font-size: 14px;
+            position: absolute;
+            right: 15px;
+        }
+
+        .layui-black-card-status {
+            padding:0 10px 10px;
+        }
+        .layui-black-card-status li {
+            position: relative;
+            padding: 10px 0;
+            border-bottom: 1px solid #EEE;
+        }
+        .layui-black-card-status li h3 {
+            padding-bottom: 5px;
+            font-weight: 700;
+        }
+        .layui-black-card-status li p {
+            padding-bottom: 10px;
+        }
+        .layui-black-card-status li > span {
+            color: #999;
+        }
+        .layui-black-home2-usernote .layui-balck-reply {
+            display: none;
+            position: absolute;
+            right: 0;
+            bottom: 12px;
+        }
+        [lay-href], [lay-tips], [layblack-event] {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body class="layui-layout-body">
+    <div class="layui-layout layui-layout-admin">
+        <div class="layui-header">
+            <div class="layui-logo">layui 后台布局</div>
+            <!-- 头部区域（可配合layui已有的水平导航） -->
+            <ul class="layui-nav layui-layout-left">
+                <li class="layui-nav-item"><a href="">控制台</a></li>
+                <li class="layui-nav-item"><a href="">商品管理</a></li>
+                <li class="layui-nav-item"><a href="">用户</a></li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;">其它系统</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="">邮件管理</a></dd>
+                        <dd><a href="">消息管理</a></dd>
+                        <dd><a href="">授权管理</a></dd>
+                    </dl>
+                </li>
+            </ul>
+            <ul class="layui-nav layui-layout-right">
+                <li class="layui-nav-item">
+                    <a href="javascript:;">
+                        <img src="//tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg" class="layui-nav-img">
+                        贤心
+                    </a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="">基本资料</a></dd>
+                        <dd><a href="">安全设置</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item"><a href="">退了</a></li>
+            </ul>
+        </div>
+
+        <div class="layui-side layui-bg-black">
+            <div class="layui-side-scroll">
+                <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+                <ul class="layui-nav layui-nav-tree" lay-filter="test">
+                    <li class="layui-nav-item layui-nav-itemed">
+                        <a class="" href="javascript:;">所有商品</a>
+                        <dl class="layui-nav-child">
+                            <dd><a id="001" data-url="/Product/Index" href="javascript:;">产品列表</a></dd>
+                            <dd><a id="003" data-url="/UserInfo/List" href="javascript:;">用户列表</a></dd>
+                            <dd><a href="">超链接</a></dd>
+                        </dl>
+                    </li>
+                    <li class="layui-nav-item">
+                        <a href="javascript:;">解决方案</a>
+                        <dl class="layui-nav-child">
+                            <dd><a href="javascript:;">列表一</a></dd>
+                            <dd><a href="javascript:;">列表二</a></dd>
+                            <dd><a href="">超链接</a></dd>
+                        </dl>
+                    </li>
+                    <li class="layui-nav-item"><a href="">云市场</a></li>
+                    <li class="layui-nav-item"><a href="">发布商品</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="layui-body" style="bottom: 0px;">
+            <div style="padding-left: 15px">
+                @*内容主体区域*@
+                <div class="layui-tab" lay-allowClose="true" lay-filter="tab-switch">
+                    <ul class="layui-tab-title">
+                        <li class="layui-this first-tab">首页</li>
+                    </ul>
+                    <div class="layui-tab-content" style="background-color:#f2f2f2">
+                        <div class="layui-tab-item layui-show">
+
+
+                            <div class="layui-row layui-col-space15">
+                                <div class="layui-col-sm6 layui-col-md3">
+                                    <div class="layui-card">
+                                        <div class="layui-card-header">
+                                            访问量
+                                            <span class="layui-badge layui-bg-blue layui-black-badge ">周</span>
+                                        </div>
+                                        <div class="layui-card-body layui-black-card-list">
+                                            <p class="layui-black-big-font">9,999,666</p>
+                                            <p>
+                                                总计访问量
+                                                <span class="layui-black-span-clor">88万 <i class="layui-icon"></i></span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="layui-col-sm6 layui-col-md3">
+                                    <div class="layui-card">
+                                        <div class="layui-card-header">
+                                            下载
+                                            <span class="layui-badge layui-bg-cyan layui-black-badge">月</span>
+                                        </div>
+                                        <div class="layui-card-body layui-black-card-list">
+                                            <p class="layui-black-big-font">33,555</p>
+                                            <p>
+                                                新下载
+                                                <span class="layui-black-span-clor">10% <i class="layui-icon"></i></span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="layui-col-sm6 layui-col-md3">
+                                    <div class="layui-card">
+                                        <div class="layui-card-header">
+                                            收入
+                                            <span class="layui-badge layui-bg-green layui-black-badge" ">年</span>
+                                        </div>
+                                        <div class="layui-card-body layui-black-card-list">
+
+                                            <p class="layui-black-big-font">999,666</p>
+                                            <p>
+                                                总收入
+                                                <span class="layui-black-span-clor">*** <i class="layui-icon"></i></span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="layui-col-sm6 layui-col-md3">
+                                    <div class="layui-card">
+                                        <div class="layui-card-header">
+                                            活跃用户
+                                            <span class="layui-badge layui-bg-orange layui-black-badge">月</span>
+                                        </div>
+                                        <div class="layui-card-body layui-black-card-list">
+
+                                            <p class="layui-black-big-font">66,666</p>
+                                            <p>
+                                                最近一个月
+                                                <span class="layui-black-span-clor">15% <i class="layui-icon"></i></span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="layui-col-sm7 layui-col-md7">
+                                    <div class="layui-card">
+                                        <div class="layui-card-header">访问量</div>
+                                        <div class="layui-card-body">
+                                            <div id="main" style="height:400px"></div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                                <div class="layui-co1-sm5 layui-col-md5">
+                                    <div class="layui-card">
+                                        <div class="layui-card-header">饼图</div>
+                                        <div class="layui-card-body">
+                                            <div id="cicle" style="height:400px"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="layui-col-sm4">
+                                    <div class="layui-card">
+                                        <div class="layui-card-header">用户留言</div>
+                                        <div class="layui-card-body">
+                                            <ul class="layui-black-card-status layui-black-home2-usernote">
+                                                <li>
+                                                    <h3>贤心</h3>
+                                                    <p>作为 layui 官方推出的后台模板，从初版的饱受争议，到后续的埋头丰富，逐步占据了国内后台系统应用的主要市场。</p>
+                                                    <span>5月30日 2019-06-06 18:00</span>>
+                                                </li>
+                                                <li>
+                                                    <h3>诸葛亮</h3>
+                                                    <p>皓首匹夫！苍髯老贼！你枉活九十有六，一生未立寸功，只会摇唇鼓舌！助曹为虐！一条断脊之犬，还敢在我军阵前狺狺狂吠，我从未见过有如此厚颜无耻之人！</p>
+                                                    <span>5月02日 2019-06-06 18:00</span>
+                                                </li>
+                                                <li>
+                                                    <h3>胡歌</h3>
+                                                    <p>你以为只要长得漂亮就有男生喜欢？你以为只要有了钱漂亮妹子就自己贴上来了？你以为学霸就能找到好工作？我告诉你吧，这些都是真的！</p>
+                                                    <span>5月11日 2019-06-06 18:00</span>
+                                                </li>
+                                                <li>
+                                                    <h3>杜甫</h3>
+                                                    <p>人才虽高，不务学问，不能致圣。刘向十日画一水，五日画一石。</p>
+                                                    <span>4月11日 2019-06-06 18:00</span>
+                                                </li>
+                                                <li>
+                                                    <h3>鲁迅</h3>
+                                                    <p>路本是无所谓有和无的，走的人多了，就没路了。。</p>
+                                                    <span>4月28日 2019-06-06 18:00</span>
+                                                </li>
+                                                <li>
+                                                    <h3>张爱玲</h3>
+                                                    <p>于千万人之中遇到你所要遇到的人，于千万年之中，时间的无涯的荒野中，没有早一步，也没有晚一步，刚巧赶上了，那也没有别的话好说，唯有轻轻的问一声：“噢，原来你也在这里？”</p>
+                                                    <span>4月11日 2019-06-06 18:00</span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="layui-col-sm8">
+                                    <div class="layui-row layui-col-space15">
+                                        <div class="layui-col-sm12">
+                                            <div class="layui-card">
+                                                <div class="layui-card-header">用户列表</div>
+                                                <div class="layui-card-body">
+                                                    <table class="layui-table">
+                                                        <colgroup>
+                                                            <col width="150">
+                                                            <col width="150">
+                                                            <col width="200">
+                                                            <col>
+                                                        </colgroup>
+                                                        <thead>
+                                                            <tr>
+                                                                <th>人物</th>
+                                                                <th>民族</th>
+                                                                <th>出场时间</th>
+                                                                <th>格言</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>贤心</td>
+                                                                <td>汉族</td>
+                                                                <td>1989-10-14</td>
+                                                                <td>人生似修行</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>张爱玲</td>
+                                                                <td>汉族</td>
+                                                                <td>1920-09-30</td>
+                                                                <td>于千万人之中遇见你所遇见的人，于千万年之中，时间的无涯的荒野里…</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Helen Keller</td>
+                                                                <td>拉丁美裔</td>
+                                                                <td>1880-06-27</td>
+                                                                <td> Life is either a daring adventure or nothing.</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>岳飞</td>
+                                                                <td>汉族</td>
+                                                                <td>1103-北宋崇宁二年</td>
+                                                                <td>教科书再滥改，也抹不去“民族英雄”的事实</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>孟子</td>
+                                                                <td>华夏族（汉族）</td>
+                                                                <td>公元前-372年</td>
+                                                                <td>猿强，则国强。国强，则猿更强！ </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="layui-col-sm12">
+                                            <div class="layui-card">
+                                                <div class="layui-card-header">用户列表</div>
+                                                <div class="layui-card-body">
+                                                    <table class="layui-table">
+                                                        <colgroup>
+                                                            <col width="150">
+                                                            <col width="150">
+                                                            <col width="200">
+                                                            <col>
+                                                        </colgroup>
+                                                        <thead>
+                                                            <tr>
+                                                                <th>人物</th>
+                                                                <th>民族</th>
+                                                                <th>出场时间</th>
+                                                                <th>格言</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>贤心</td>
+                                                                <td>汉族</td>
+                                                                <td>1989-10-14</td>
+                                                                <td>人生似修行</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>张爱玲</td>
+                                                                <td>汉族</td>
+                                                                <td>1920-09-30</td>
+                                                                <td>于千万人之中遇见你所遇见的人，于千万年之中，时间的无涯的荒野里…</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Helen Keller</td>
+                                                                <td>拉丁美裔</td>
+                                                                <td>1880-06-27</td>
+                                                                <td> Life is either a daring adventure or nothing.</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>岳飞</td>
+                                                                <td>汉族</td>
+                                                                <td>1103-北宋崇宁二年</td>
+                                                                <td>教科书再滥改，也抹不去“民族英雄”的事实</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>孟子</td>
+                                                                <td>华夏族（汉族）</td>
+                                                                <td>公元前-372年</td>
+                                                                <td>猿强，则国强。国强，则猿更强！ </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                   
+                                </div>
+
+                                <script type="text/javascript">
+                                    // 基于准备好的dom，初始化echarts实例
+                                    var myChart = echarts.init(document.getElementById('main'));
+
+                                    // 指定图表的配置项和数据
+                                    var option = {
+                                        title: {
+                                            text: 'ECharts 入门示例'
+                                        },
+                                        tooltip: {},
+                                        legend: {
+                                            data: ['销量']
+                                        },
+                                        xAxis: {
+                                            data: ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
+                                        },
+                                        yAxis: {},
+                                        series: [{
+                                            name: '销量',
+                                            type: 'bar',
+                                            data: [5, 20, 36, 10, 10, 20]
+                                        }]
+                                    };
+
+                                    // 使用刚指定的配置项和数据显示图表。
+                                    myChart.setOption(option);
+
+                                    var myChart2 = echarts.init(document.getElementById('cicle'));
+                                    var option2 = {
+                                        tooltip: {
+                                            trigger: 'item',
+                                            formatter: "{a} <br/>{b}: {c} ({d}%)"
+                                        },
+                                        legend: {
+                                            orient: 'vertical',
+                                            x: 'left',
+                                            data: ['直接访问', '邮件营销', '联盟广告', '视频广告', '搜索引擎']
+                                        },
+                                        series: [
+                                            {
+                                                name: '访问来源',
+                                                type: 'pie',
+                                                radius: ['50%', '70%'],
+                                                avoidLabelOverlap: false,
+                                                label: {
+                                                    normal: {
+                                                        show: false,
+                                                        position: 'center'
+                                                    },
+                                                    emphasis: {
+                                                        show: true,
+                                                        textStyle: {
+                                                            fontSize: '30',
+                                                            fontWeight: 'bold'
+                                                        }
+                                                    }
+                                                },
+                                                labelLine: {
+                                                    normal: {
+                                                        show: false
+                                                    }
+                                                },
+                                                data: [
+                                                    { value: 335, name: '直接访问' },
+                                                    { value: 310, name: '邮件营销' },
+                                                    { value: 234, name: '联盟广告' },
+                                                    { value: 135, name: '视频广告' },
+                                                    { value: 1548, name: '搜索引擎' }
+                                                ]
+                                            }
+                                        ]
+                                    };
+                                    myChart2.setOption(option2);
+                                </script>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-footer">
+        <!-- 底部固定区域 -->
+        © layui.com - 底部固定区域
+    </div>
+    <script src="~/Content/layui/layui.js"></script>
+    <script>
+        //JavaScript代码区域
+        //var element;
+        //var $;
+        layui.use(['element'], function () {
+            var $ = layui.jquery
+                , element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块
+            var obj = {
+                addTab: function (tabTitle, tabUrl, tabId) {
+                    if ($(".layui-tab-title li[lay-id=" + tabId + "]").length > 0) {
+                        element.tabChange('tab-switch', tabId);
+                    } else {
+                        element.tabAdd('tab-switch', {
+                            title: tabTitle
+                            , content: '<iframe src=' + tabUrl + ' width="100%" style="min-height: 500px;" frameborder="0" scrolling="auto" onload="setIframeHeight(this)"></iframe>' // 选项卡内容，支持传入html
+                            , id: tabId //选项卡标题的lay-id属性值
+                            ,
+                        });
+                        element.tabChange('tab-switch', tabId); //切换到新增的tab上
+                    }
+                }
+            };
+            //监听左侧菜单点击
+            element.on('nav(test)', function (elem) {
+                //alert(elem.context.attributes + "sss");
+                obj.addTab(elem[0].innerText, elem[0].attributes[1].nodeValue, elem[0].id);
+
+            });
+            //监听tab选项卡切换
+            element.on('tab(tab-switch)', function (data) {
+                if (data.elem.context.attributes) {
+                    var id = data.elem.context.attributes[0].nodeValue;
+                    //console.log(data.elem.context);
+                    layui.each($(".layui-nav-child"), function () {
+                        $(this).find("dd").removeClass("layui-this");
+                    });
+                    $("#" + id).attr("class", "layui-this");
+                } else {
+                }
+
+
+            });
+
+
+
+            //触发事件
+            //var active = {
+            //    tabAdd: function () {
+            //        //新增一个Tab项
+            //        element.tabAdd('demo', {
+            //            title: '新选项' + (Math.random() * 1000 | 0) //用于演示
+            //            , content: '内容' + (Math.random() * 1000 | 0)
+            //            , id: new Date().getTime() //实际使用一般是规定好的id，这里以时间戳模拟下
+            //        })
+            //    }
+            //    , tabDelete: function (othis) {
+            //        //删除指定Tab项
+            //        element.tabDelete('demo', '44'); //删除：“商品管理”
+
+
+            //        othis.addClass('layui-btn-disabled');
+            //    }
+            //    , tabChange: function () {
+            //        //切换到指定Tab项
+            //        element.tabChange('demo', '22'); //切换到：用户管理
+            //    }
+            //};
+            //$('.site-demo-active').on('click', function () {
+            //    var othis = $(this), type = othis.data('type');
+            //    active[type] ? active[type].call(this, othis) : '';
+            //});
+        });
+        // * 新增tab选项卡，如果已经存在则打开已经存在的，不存在则新增
+        //     * param tabTitle 选项卡标题名称
+        //     * param tabUrl 选项卡链接的页面URL
+        //     * param tabId 选项卡id*
+        //function addTab(tabTitle, tabUrl, tabId) {
+        //    if ($(".layui-tab-title li[lay-id=" + tabId + "]").length > 0) {
+        //        element.tabChange('tab-switch', tabId);
+        //    } else {
+        //        element.tabAdd('tab-switch', {
+        //            title: tabTitle
+        //            , content: '<iframe src=' + tabUrl + ' width="100%" style="min-height: 500px;" frameborder="0" scrolling="auto" onload="setIframeHeight(this)"></iframe>' // 选项卡内容，支持传入html
+        //            , id: tabId //选项卡标题的lay-id属性值
+        //        });
+        //        element.tabChange('tab-switch', tabId); //切换到新增的tab上
+        //    }
+        //}
+        //**
+        // * ifrme自适应页面高度，需要设定min-height
+        //* param iframe
+        //*/
+        function setIframeHeight(iframe) {
+            if (iframe) {
+                var iframeWin = iframe.contentWindow || iframe.contentDocument.parentWindow;
+                if (iframeWin.document.body) {
+                    iframe.height = iframeWin.document.documentElement.scrollHeight || iframeWin.document.body.scrollHeight;
+                }
+            }
+        };
+    </script>
+
+</body>
+</html>

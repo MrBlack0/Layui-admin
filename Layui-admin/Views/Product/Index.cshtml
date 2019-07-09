@@ -1,0 +1,454 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>商品列表</title>
+    <link href="~/Content/layui/css/layui.css" rel="stylesheet" />
+    <style>
+        body {
+            background-color: #f6f6f6;
+        }
+
+        .products img {
+            width: 185px;
+        }
+
+        .cmdlist-container {
+            background: #fff;
+            border: 1px solid transparent;
+        }
+
+        .cmdlist-text {
+            padding: 20px;
+        }
+
+            .cmdlist-text .info {
+                height: 40px;
+                font-size: 14px;
+                line-height: 20px;
+                width: 100%;
+                overflow: hidden;
+                color: #666;
+                margin-bottom: 10px;
+            }
+
+            .cmdlist-text .price {
+                font-size: 14px;
+            }
+
+                .cmdlist-text .price b {
+                    margin-right: 20px;
+                }
+
+                .cmdlist-text .price p {
+                    display: inline-block;
+                }
+
+            .cmdlist-text .flow {
+                text-align: right;
+                float: right;
+            }
+
+        #page {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="layui-fluid products">
+        <form class="layui-form" style="padding:15px ;background-color:#ccc" action="">
+            <div class="layui-form-item" style="margin-bottom:0px;">
+                <div class="layui-input-inline">
+                    <input type="text" name="name" required="" lay-verify="required" placeholder="输入商品名称" autocomplete="off" class="layui-input">
+                </div>
+                <div class="layui-input-inline">
+                    <select name="city" lay-verify="required">
+                        <option value="">一级分类</option>
+                        <option value="0">上衣</option>
+                        <option value="1">裤子</option>
+                        <option value="2">外套</option>
+                        <option value="3">鞋子option>
+                        <option value="4">童装</option>
+                    </select>
+                </div>
+                <div class="layui-input-inline">
+                    <select name="cityid" id="cityid" lay-filter="cityid">
+                        <option value="">二级分类</option>
+                    </select>
+                </div>
+                <button class="layui-btn" lay-submit="" lay-filter="formDemo">检索</button>
+
+            </div>
+        </form>
+
+        <blockquote class="layui-elem-quote">
+            <div class="layui-btn-group">
+                <button type="button" class="layui-btn" id="addProduct">增加</button>
+                <button type="button" class="layui-btn" id="editProduct">删除</button>
+            </div>
+        </blockquote>
+
+        <hr />
+        <div class="layui-row layui-col-space10 ">
+            <div class="layui-col-md2 layui-col-sm4">
+                <div class="cmdlist-container">
+                    <a href="javascript:;">
+                        <img src="~/Content/images/8.jpg" />
+                    </a>
+                    <a>
+                        <div class="cmdlist-text">
+                            <p class="info">2018春夏季新款港味短款白色T恤+网纱中长款chic半身裙套装两件套</p>
+                            <div class="price">
+                                <b>￥79</b>
+                                <p>￥<del>130</del></p>
+                                <span class="flow"><i class="layui-icon layui-icon-rate">433</i></span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="layui-col-md2 layui-col-sm4">
+                <div class="cmdlist-container">
+                    <a href="javascript:;">
+                        <img src="~/Content/images/8.jpg" />
+                    </a>
+                    <a>
+                        <div class="cmdlist-text">
+                            <p class="info">2018春夏季新款港味短款白色T恤+网纱中长款chic半身裙套装两件套</p>
+                            <div class="price">
+                                <b>￥79</b>
+                                <p>￥<del>130</del></p>
+                                <span class="flow"><i class="layui-icon layui-icon-rate">433</i></span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="layui-col-md2 layui-col-sm4">
+                <div class="cmdlist-container">
+                    <a href="javascript:;">
+                        <img src="~/Content/images/8.jpg" />
+                    </a>
+                    <a>
+                        <div class="cmdlist-text">
+                            <p class="info">2018春夏季新款港味短款白色T恤+网纱中长款chic半身裙套装两件套</p>
+                            <div class="price">
+                                <b>￥79</b>
+                                <p>￥<del>130</del></p>
+                                <span class="flow"><i class="layui-icon layui-icon-rate">433</i></span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="layui-col-md2 layui-col-sm4">
+                <div class="cmdlist-container">
+                    <a href="javascript:;">
+                        <img src="~/Content/images/8.jpg" />
+                    </a>
+                    <a>
+                        <div class="cmdlist-text">
+                            <p class="info">2018春夏季新款港味短款白色T恤+网纱中长款chic半身裙套装两件套</p>
+                            <div class="price">
+                                <b>￥79</b>
+                                <p>￥<del>130</del></p>
+                                <span class="flow"><i class="layui-icon layui-icon-rate">433</i></span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="layui-col-md2 layui-col-sm4">
+                <div class="cmdlist-container">
+                    <a href="javascript:;">
+                        <img src="~/Content/images/8.jpg" />
+                    </a>
+                    <a>
+                        <div class="cmdlist-text">
+                            <p class="info">2018春夏季新款港味短款白色T恤+网纱中长款chic半身裙套装两件套</p>
+                            <div class="price">
+                                <b>￥79</b>
+                                <p>￥<del>130</del></p>
+                                <span class="flow"><i class="layui-icon layui-icon-rate">433</i></span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="layui-col-md2 layui-col-sm4">
+                <div class="cmdlist-container">
+                    <a href="javascript:;">
+                        <img src="~/Content/images/8.jpg" />
+                    </a>
+                    <a>
+                        <div class="cmdlist-text">
+                            <p class="info">2018春夏季新款港味短款白色T恤+网纱中长款chic半身裙套装两件套</p>
+                            <div class="price">
+                                <b>￥79</b>
+                                <p>￥<del>130</del></p>
+                                <span class="flow"><i class="layui-icon layui-icon-rate">433</i></span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="layui-row layui-col-space10 ">
+            <div class="layui-col-md2 layui-col-sm4">
+                <div class="cmdlist-container">
+                    <a href="javascript:;">
+                        <img src="~/Content/images/8.jpg" />
+                    </a>
+                    <a>
+                        <div class="cmdlist-text">
+                            <p class="info">2018春夏季新款港味短款白色T恤+网纱中长款chic半身裙套装两件套</p>
+                            <div class="price">
+                                <b>￥79</b>
+                                <p>￥<del>130</del></p>
+                                <span class="flow"><i class="layui-icon layui-icon-rate">433</i></span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="layui-col-md2 layui-col-sm4">
+                <div class="cmdlist-container">
+                    <a href="javascript:;">
+                        <img src="~/Content/images/8.jpg" />
+                    </a>
+                    <a>
+                        <div class="cmdlist-text">
+                            <p class="info">2018春夏季新款港味短款白色T恤+网纱中长款chic半身裙套装两件套</p>
+                            <div class="price">
+                                <b>￥79</b>
+                                <p>￥<del>130</del></p>
+                                <span class="flow"><i class="layui-icon layui-icon-rate">433</i></span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="layui-col-md2 layui-col-sm4">
+                <div class="cmdlist-container">
+                    <a href="javascript:;">
+                        <img src="~/Content/images/8.jpg" />
+                    </a>
+                    <a>
+                        <div class="cmdlist-text">
+                            <p class="info">2018春夏季新款港味短款白色T恤+网纱中长款chic半身裙套装两件套</p>
+                            <div class="price">
+                                <b>￥79</b>
+                                <p>￥<del>130</del></p>
+                                <span class="flow"><i class="layui-icon layui-icon-rate">433</i></span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="layui-col-md2 layui-col-sm4">
+                <div class="cmdlist-container">
+                    <a href="javascript:;">
+                        <img src="~/Content/images/8.jpg" />
+                    </a>
+                    <a>
+                        <div class="cmdlist-text">
+                            <p class="info">2018春夏季新款港味短款白色T恤+网纱中长款chic半身裙套装两件套</p>
+                            <div class="price">
+                                <b>￥79</b>
+                                <p>￥<del>130</del></p>
+                                <span class="flow"><i class="layui-icon layui-icon-rate">433</i></span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="layui-col-md2 layui-col-sm4">
+                <div class="cmdlist-container">
+                    <a href="javascript:;">
+                        <img src="~/Content/images/8.jpg" />
+                    </a>
+                    <a>
+                        <div class="cmdlist-text">
+                            <p class="info">2018春夏季新款港味短款白色T恤+网纱中长款chic半身裙套装两件套</p>
+                            <div class="price">
+                                <b>￥79</b>
+                                <p>￥<del>130</del></p>
+                                <span class="flow"><i class="layui-icon layui-icon-rate">433</i></span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="layui-col-md2 layui-col-sm4">
+                <div class="cmdlist-container">
+                    <a href="javascript:;">
+                        <img src="~/Content/images/8.jpg" />
+                    </a>
+                    <a>
+                        <div class="cmdlist-text">
+                            <p class="info">2018春夏季新款港味短款白色T恤+网纱中长款chic半身裙套装两件套</p>
+                            <div class="price">
+                                <b>￥79</b>
+                                <p>￥<del>130</del></p>
+                                <span class="flow"><i class="layui-icon layui-icon-rate">433</i></span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="layui-row layui-col-space10 ">
+            <div class="layui-col-md2 layui-col-sm4">
+                <div class="cmdlist-container">
+                    <a href="javascript:;">
+                        <img src="~/Content/images/8.jpg" />
+                    </a>
+                    <a>
+                        <div class="cmdlist-text">
+                            <p class="info">2018春夏季新款港味短款白色T恤+网纱中长款chic半身裙套装两件套</p>
+                            <div class="price">
+                                <b>￥79</b>
+                                <p>￥<del>130</del></p>
+                                <span class="flow"><i class="layui-icon layui-icon-rate">433</i></span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="layui-col-md2 layui-col-sm4">
+                <div class="cmdlist-container">
+                    <a href="javascript:;">
+                        <img src="~/Content/images/8.jpg" />
+                    </a>
+                    <a>
+                        <div class="cmdlist-text">
+                            <p class="info">2018春夏季新款港味短款白色T恤+网纱中长款chic半身裙套装两件套</p>
+                            <div class="price">
+                                <b>￥79</b>
+                                <p>￥<del>130</del></p>
+                                <span class="flow"><i class="layui-icon layui-icon-rate">433</i></span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="layui-col-md2 layui-col-sm4">
+                <div class="cmdlist-container">
+                    <a href="javascript:;">
+                        <img src="~/Content/images/8.jpg" />
+                    </a>
+                    <a>
+                        <div class="cmdlist-text">
+                            <p class="info">2018春夏季新款港味短款白色T恤+网纱中长款chic半身裙套装两件套</p>
+                            <div class="price">
+                                <b>￥79</b>
+                                <p>￥<del>130</del></p>
+                                <span class="flow"><i class="layui-icon layui-icon-rate">433</i></span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="layui-col-md2 layui-col-sm4">
+                <div class="cmdlist-container">
+                    <a href="javascript:;">
+                        <img src="~/Content/images/8.jpg" />
+                    </a>
+                    <a>
+                        <div class="cmdlist-text">
+                            <p class="info">2018春夏季新款港味短款白色T恤+网纱中长款chic半身裙套装两件套</p>
+                            <div class="price">
+                                <b>￥79</b>
+                                <p>￥<del>130</del></p>
+                                <span class="flow"><i class="layui-icon layui-icon-rate">433</i></span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="layui-row">
+            <div class="layui-col-md12">
+                <div id="page"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/Content/layui/layui.js"></script>
+    <script>
+        layui.use(['form', 'laypage'], function () {
+            var laypage = layui.laypage, $ = layui.jquery, layer = layui.layer;
+            var form = layui.form;
+            //执行一个laypage实例
+            laypage.render({
+                layout: ['prev', 'page', 'next', 'limit'],
+                elem: 'page', //注意，这里的 test1 是 ID，不用加 # 号
+                count: 500, //数据总数，从服务端得到
+                limit: 30,
+                limits: [10, 20, 30, 40, 50],
+                jump: function (obj, first) {
+                    //obj包含了当前分页的所有参数，比如：
+                    console.log(obj.curr); //得到当前页，以便向服务端请求对应页的数据。
+                    console.log(obj.limit); //得到每页显示的条数
+
+                    //首次不执行
+                    if (!first) {
+                        //do something
+                    }
+                }
+            });
+            $("#addProduct").click(function () {
+                add();
+            });
+            function add() {
+                layer.open({
+                    type: 2
+                    , title: '添加产品'
+                    , content: "http://" + window.location.host + "/Product/Add"
+                    , maxmin: true
+                    , area: ['60%', '70%']
+                    , offset: 't'
+                    , btn: ['确定', '取消']
+                    , yes: function (index, layero) {
+                        console.log('hello,ifram');
+                        var iframeWindow = window['layui-layer-iframe' + index]
+                            , submitID = 'addProduct'
+                            , submit = layero.find('iframe').contents().find('#' + submitID);
+                        //监听提交
+                        iframeWindow.layui.form.on('submit(' + submitID + ')', function (data) {
+                            var field = data.field; //获取提交的字段
+                            //提交 Ajax 成功后，静态更新表格中的数据
+                            $.ajax({
+                                type: "post",
+                                url: '/Product/Add',
+                                data: field,
+                                dataType: "json",
+                                success: function (data) {
+                                    layer.msg(data.msg);
+                                },
+                                error: function () {
+                                    alert("Post请求发生异常！");
+                                }
+                            });
+                            //table.reload('addProduct'); //数据刷新
+                            layer.close(index); //关闭弹层
+                        });
+
+                        submit.trigger('click');
+                    }
+                });
+            }
+        });
+    </script>
+
+</body>
+
+</html>
