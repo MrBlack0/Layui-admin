@@ -24,7 +24,7 @@ namespace Layui_admin.Filters
                 LogHelper.WriteError(message);
                 //转向
                 filterContext.ExceptionHandled = true;
-                filterContext.Result = new RedirectResult("/Common/Error");
+                filterContext.Result = new RedirectResult("/Error/ErrorPage");
             }
             base.OnException(filterContext);
         }
