@@ -68,5 +68,9 @@ namespace Layui_admin.BLL
         {
             return CurrentDal.ExcuteSqlParm(sql, parm);
         }
+        public int Count(Expression<Func<T, bool>> whereLambda)
+        {
+            return CurrentDal.Count(whereLambda);
+        }
     }
 }

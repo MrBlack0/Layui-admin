@@ -53,6 +53,9 @@
     <Reference Include="JWT, Version=5.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\JWT.5.2.2\lib\net46\JWT.dll</HintPath>
     </Reference>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
@@ -112,7 +115,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\images\8.jpg" />
+    <Content Include="Content\js\common.js" />
     <Content Include="Content\js\echarts\echarts.js" />
+    <Content Include="Content\js\jquery-3.2.1.min.js" />
+    <Content Include="Content\js\moudles\blackAdmin.js" />
     <Content Include="Content\layui\css\layui.css" />
     <Content Include="Content\layui\css\layui.mobile.css" />
     <Content Include="Content\layui\css\modules\code.css" />
@@ -226,6 +232,9 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="common\CurrenUserInfo.cs" />
+    <Compile Include="common\LogHelper.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ImageCodeController.cs" />
     <Compile Include="Controllers\IndexController.cs" />
@@ -233,10 +242,12 @@
     <Compile Include="Controllers\UploadImgController.cs" />
     <Compile Include="Controllers\UserInfoController.cs" />
     <Compile Include="Filters\MyAuthorizeAttribute.cs" />
+    <Compile Include="Filters\MyExceptionAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="jwt\JwtHelper.cs" />
+    <Compile Include="Models\LoginPaylod.cs" />
     <Compile Include="Models\UsersMemory.cs" />
     <Compile Include="Models\ResModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -250,11 +261,14 @@
     <Content Include="Content\layui\font\iconfont.woff" />
     <Content Include="Views\UserInfo\LayuiDemo.cshtml" />
     <Content Include="Views\Index\Index.cshtml" />
-    <Content Include="Views\Product\Index.cshtml" />
+    <Content Include="Views\Product\Products.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Product\Add.cshtml" />
+    <Content Include="Views\Product\AddProduct.cshtml" />
+    <Content Include="Config\log4net.config" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
-    <Content Include="Views\UserInfo\List.cshtml" />
+    <Content Include="Views\UserInfo\UserList.cshtml" />
+    <Content Include="Views\UserInfo\AddUser.cshtml" />
+    <Content Include="Views\UserInfo\testview.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -264,6 +278,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Base\" />
     <Folder Include="Views\ImageCode\" />
     <Folder Include="Views\UploadImg\" />
   </ItemGroup>
@@ -271,6 +286,10 @@
     <ProjectReference Include="..\Layui-admin.BLL\Layui-admin.BLL.csproj">
       <Project>{2b3b027a-0c76-4f29-b36e-2d45c5b5d99d}</Project>
       <Name>Layui-admin.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Layui-admin.Common\Layui-admin.Common.csproj">
+      <Project>{dc9d889b-ed12-48ee-9da9-ec5794fded27}</Project>
+      <Name>Layui-admin.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\Layui-admin.Model\Layui-admin.Model.csproj">
       <Project>{80abd677-2895-4b1a-8796-97e2755154ca}</Project>

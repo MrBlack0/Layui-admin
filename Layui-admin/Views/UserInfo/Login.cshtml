@@ -76,7 +76,7 @@
     <div id="login_frame">
         <div class="login_head">后台登录入口</div>
         <div class="login_body">
-            <input type="hidden" id="token"/>
+            <input type="hidden" id="token" />
             <form class="layui-form" action="" method="post">
                 <div class="layui-form-item">
                     <label class="layui-form-label">用户名</label>
@@ -100,22 +100,33 @@
                 </div>
                 <div class="layui-form-item">
                     <div class="layui-input-block">
-                        <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+                        <button class="layui-btn" id="submit" lay-submit lay-filter="formDemo">立即提交</button>
                         <button type="reset" class="layui-btn layui-btn-primary">重置</button>
                     </div>
                 </div>
             </form>
         </div>
     </div>
+
     <script src="~/Content/layui/layui.js"></script>
     <script>
-        layui.use('form', function () {
+
+
+        layui.use(['form', 'layer'], function () {
             var form = layui.form, $ = layui.jquery, layer = layui.layer;
             //监听提交
             form.on('submit(formDemo)', function (data) {
                 //layer.alert(JSON.stringify(data.field), {
                 //    title: '最终的提交信息'
                 //})
+                login(data);
+                return false;
+            });
+            $(function () {
+                reach();
+                setImgCode();
+            });
+            function login(data) {
                 $.ajax({
                     type: "post",
                     url: '/UserInfo/Login',
@@ -133,11 +144,18 @@
                         alert("Post请求发生异常！");
                     }
                 });
-                return false;
-            });
-            $(function () {
-                setImgCode();
-            });
+            }
+            document.onkeydown = function (e) {
+                if (!e) e = window.event;//火狐中是 window.event
+                if ((e.keyCode || e.which) == 13) {
+                    $("#verifyCode").click();
+                }
+            }
+            function reach() {
+                if (self.location !== top.location) {
+                    top.location = self.location;
+                }
+            }
             function setImgCode() {
                 $("#imgcode").attr("src", "http://" + window.location.host + "/ImageCode/GetImage?r=" + Math.random());
                 $("#verifyCode").val("");

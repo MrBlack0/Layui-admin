@@ -14,6 +14,8 @@ namespace Layui_admin.App_Start
             filters.Add(new HandleErrorAttribute());
             // 全局身份验证过滤器 更方便 
             filters.Add(new MyAuthorizeAttribute());
+            //全局注册exception
+            filters.Add(new MyExceptionAttribute());
         }
     }
 }

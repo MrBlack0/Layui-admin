@@ -98,5 +98,18 @@ namespace Layui_admin.EFDAL
                 throw;
             }
         }
+
+        public int Count(Expression<Func<T, bool>> whereLambda)
+        {
+            try
+            {
+                int count = dbContext.Set<T>().Where(whereLambda).Count();
+                return count;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

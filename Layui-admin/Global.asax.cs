@@ -1,6 +1,8 @@
 ﻿using Layui_admin.App_Start;
+using Layui_admin.common;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -15,6 +17,7 @@ namespace Layui_admin
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
+            
         }
     }
 }

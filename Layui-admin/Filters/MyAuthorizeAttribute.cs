@@ -12,6 +12,7 @@ namespace Layui_admin.Filters
         public override void OnAuthorization(AuthorizationContext filterContext)
         {
             //死否匿名请求
+
             var attr = filterContext.ActionDescriptor.GetCustomAttributes(true).OfType<AllowAnonymousAttribute>();
             bool isAnonymous = attr.Any(a => a is AllowAnonymousAttribute);
             if (isAnonymous)
@@ -28,18 +29,19 @@ namespace Layui_admin.Filters
             }
             var context = filterContext.HttpContext;
             var authHeader = filterContext.HttpContext.Request.Cookies["authorize"];
+
             if (authHeader == null)
             {
-                context.Response.StatusCode = (int)System.Net.HttpStatusCode.Forbidden;
+                context.Response.StatusCode = (int)System.Net.HttpStatusCode.BadRequest;
                 filterContext.HttpContext.Response.Redirect("~/UserInfo/Login", false);
                 base.OnAuthorization(filterContext);
                 return;
             }
-            var userinfo = JwtHelper.GetJwtDecode(authHeader.Value);
+            var token = JwtHelper.GetJwtDecode(authHeader.Value);
             //验证用户操作是否在权限列表中  
             //var actionName = filterContext.ActionDescriptor.ActionName;
             //var controllerName = filterContext.ActionDescriptor.ControllerDescriptor.ControllerName;
-            if (userinfo == null)
+            if (token == null || token.Expire <= DateTime.Now)
             {
                 filterContext.HttpContext.Response.Redirect("~/UserInfo/Login", false);
             }

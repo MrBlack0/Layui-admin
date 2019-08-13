@@ -1,0 +1,289 @@
+﻿@model Layui_admin.Model.Admin_User
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="~/Content/layui/css/layui.css" media="all">
+    <script src="~/Content/layui/layui.js"></script>
+    <title>AddUser</title>
+    <style>
+        .userImg {
+            position: relative;
+            height: 100px;
+            width: 100px;
+            margin:0 auto;
+            cursor: pointer;
+            text-align:center;
+        }
+        .imgUrl {
+            border-radius:50px;
+        }
+        .pen {
+            position: absolute;
+            height: 50px;
+            width: 50px;
+            border: solid 1px #ccc;
+            border-radius:25px;
+            display:none;
+            top: 25px;
+            left: 25px;
+            background-color:#808080;
+            z-index:2;
+            opacity: 0.5;
+        }
+    </style>
+</head>
+<body>
+    <div @*style=" overflow:hidden;"*@>
+        <form class="layui-form" action="" lay-filter="example" enctype="multipart/form-data">
+            
+            <div class="userImg">
+                <img class="imgUrl" src="~/Content/images/8.jpg" style="height:100%;" />
+
+                <div class="pen">
+                    <i style="font-size: 30px;line-height:50px;" class="layui-icon layui-icon-edit"></i>
+                </div>
+            </div>
+
+            <div class="layui-form-item layui-hide">
+                <input type="text" name="Id" id="uid" value=@Model.Id>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">用户名</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="userName" autocomplete="off" lay-verify="required" placeholder="请输入用户名" lay-reqtext="用户名是必填项，岂能为空？" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">昵称</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="nickName" lay-verify="required" placeholder="请输入昵称" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">密码</label>
+                <div class="layui-input-inline">
+                    <input type="password" name="password" lay-verify="pass" placeholder="请输入密码" autocomplete="off" class="layui-input">
+                </div>
+                <div class="layui-form-mid layui-word-aux">请填写6到12位密码</div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">头像</label>
+                <div class="layui-input-inline">
+                    <input type="file" id="uploada" onchange="avtoryUploadImg(this)" />
+                </div>
+                <div class="layui-form-mid" id="avator"></div>
+            </div>
+
+            <div class="layui-form-item" id ="avatorupload"style="display:none">
+                <label class="layui-form-label">上传头像</label>
+                <div class="layui-input-inline layui-btn-container" style="width: auto;">
+                    <button type="button" class="layui-btn layui-btn-primary" id="test2">
+                        <i class="layui-icon">&#xe67c;</i>上传头像
+                    </button>
+                </div>
+                <input id="pics" type="hidden" value="" />
+                <div id="productPics"></div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">手机</label>
+                    <div class="layui-input-inline">
+                        <input type="tel" name="phone" lay-verify="required|phone" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">邮箱</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="email" lay-verify="email" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+
+                <div class="layui-inline">
+                    <label class="layui-form-label">出生日期</label>
+                    <div class="layui-input-inline">
+                        <input type="datetime" class="layui-input" name="birthday" id="test1">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">ip地址</label>
+                    <div class="layui-input-inline">
+                        <input name="loginIp" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">分组选择框</label>
+                    <div class="layui-input-inline">
+                        <select name="quiz">
+                            <option value="">请选择问题</option>
+                            <optgroup label="城市记忆">
+                                <option value="你工作的第一个城市">你工作的第一个城市</option>
+                            </optgroup>
+                            <optgroup label="学生时代">
+                                <option value="你的工号">你的工号</option>
+                                <option value="你最喜欢的老师">你最喜欢的老师</option>
+                            </optgroup>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">联动选择框</label>
+                <div class="layui-input-inline">
+                    <select name="quiz1">
+                        <option value="">请选择省</option>
+                        <option value="浙江" selected="">浙江省</option>
+                        <option value="你的工号">江西省</option>
+                        <option value="你最喜欢的老师">福建省</option>
+                    </select>
+                </div>
+                <div class="layui-input-inline">
+                    <select name="city">
+                        <option value="">请选择市</option>
+                        <option value="杭州">杭州</option>
+                        <option value="宁波" disabled="">宁波</option>
+                        <option value="温州">温州</option>
+                        <option value="温州">台州</option>
+                        <option value="温州">绍兴</option>
+                    </select>
+                </div>
+                <div class="layui-input-inline">
+                    <select name="quiz3">
+                        <option value="">请选择县/区</option>
+                        <option value="西湖区">西湖区</option>
+                        <option value="余杭区">余杭区</option>
+                        <option value="拱墅区">临安市</option>
+                    </select>
+                </div>
+
+            </div>
+
+            <div class="layui-form-item" pane="">
+                <label class="layui-form-label">爱好</label>
+                <div class="layui-input-block">
+                    <input type="checkbox" name="like1[write]" lay-skin="primary" title="写作" checked="">
+                    <input type="checkbox" name="like1[read]" lay-skin="primary" title="阅读">
+                    <input type="checkbox" name="like1[game]" lay-skin="primary" title="游戏" disabled="">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">开关-默认关</label>
+                <div class="layui-input-block">
+                    <input type="checkbox" name="close" lay-skin="switch" lay-text="ON|OFF">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">单选框</label>
+                <div class="layui-input-block">
+                    <input type="radio" name="sex" value="1" title="男" checked="">
+                    <input type="radio" name="sex" value="2" title="女">
+                </div>
+            </div>
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">个人介绍</label>
+                <div class="layui-input-block">
+                    <textarea placeholder="请输入自我简介" name="introduce" class="layui-textarea"></textarea>
+                </div>
+            </div>
+            <div class="layui-form-item layui-hide">
+                <input type="button" lay-submit lay-filter="addUser" id="addUser" value="确认">
+            </div>
+
+        </form>
+    </div>
+
+    <script src="~/Content/js/jquery-3.2.1.min.js"></script>
+    <script>
+        function avtoryUploadImg(obj) {
+            var file = obj.files[0];
+            var reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = function (e) {    //成功读取文件
+                var pathurl = e.target.result;//将所选择的图片路径
+                $('#avator').html('<img height="80px" src=" ' + pathurl + ' " alt="">');
+            };
+        }
+        $(".userImg").mouseenter(function () {
+            $(".pen").css("display","block");
+        });
+        $(".userImg").mouseleave(function () {
+            $(".pen").css("display", "none");
+        });
+    </script>
+    <script>
+        layui.use(['form','upload'], function () {
+            var form = layui.form,$ = layui.jquery; upload = layui.upload;
+
+            //laydate = layui.laydate;
+            //laydate.render({
+            //    elem: '#test1'
+            //});
+            upload.render({
+                elem: '#test2'
+                , url: '/UserInfo/UploadAvator/',
+                accept: 'images',
+                acceptMime: 'image/*'
+                , multiple: false
+                , method: 'post'
+                , data: {
+                    userid: function () {
+                        return $('#uid').val();
+                    }
+                }
+                , before: function (obj) {
+                    //预读本地文件示例，不支持ie8
+                    console.log(obj);
+                    obj.preview(function (index, file, result) {
+                        $('#productPics').append('<img style="height:80px;margin-right:15px;" src="' + result + '" alt="' + file.name + '" class="layui-upload-img">')
+                    });
+                }
+                , done: function (res) {
+                    //上传完毕
+                    if (res.code == 0) {
+                        console.log(res.data.src);
+                    }
+                }
+            });
+
+
+            if ("@Model.Id") {
+                console.log('不为空');
+                $("#avatorupload").css("display", "block");
+                //表单初始赋值
+                form.val('example', {
+                    "userName": "@Model.UserName" // "name": "value"
+                    , "nickName": "@Model.NickName"
+                    , "phone": "@Model.Phone"
+                    , "email": "@Model.Email"
+                    , "birthday": "@Model.Brithday"
+                    , "loginIp": "@Model.LoginIp"
+                    , "password": "******"
+                    , "interest": 1
+                    , "like[write]": true //复选框选中状态
+                    , "close": true //开关状态
+                    , "sex": @Model.Sex==1? "1":"2"
+                    , "introduce": "@Model.Introduce"
+                })
+            } else {
+                $("#avatorupload").css("display", "none");
+                console.log('为空');
+            }
+        });
+    </script>
+</body>
+</html>

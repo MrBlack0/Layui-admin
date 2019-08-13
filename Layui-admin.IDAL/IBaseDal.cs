@@ -16,5 +16,6 @@ namespace Layui_admin.IDAL
         IQueryable<T> GetPages<S>(int pageSize, int pageIndex, out int count, Expression<Func<T, bool>> whereLambda, Expression<Func<T, S>> orderByLambda, bool IsAsc);
         int ExcuteSqlParm(string sql, object[] parm = null);
         int DeleteBywhereLambda(Expression<Func<T, bool>> whereLambda);
+        int Count(Expression<Func<T, bool>> whereLambda);
     }
 }

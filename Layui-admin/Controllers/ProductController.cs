@@ -15,11 +15,11 @@ namespace Layui_admin.Controllers
         // GET: Product
         public ActionResult Index()
         {
-            return View();
+            return View("Products");
         }
         public ActionResult Add()
         {
-            return View();
+            return View("AddProduct");
         }
         [HttpPost]
         public ActionResult Add(Product entity)//FormCollection
