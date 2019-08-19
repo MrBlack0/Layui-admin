@@ -11,7 +11,7 @@ namespace Layui_admin.EFDAL
 {
     public class BaseDal<T> where T : class, new()
     {
-        DbContext dbContext = DbContextFactory.GetDbcontext();
+        public DbContext dbContext = DbContextFactory.GetDbcontext();
         public T AddEntity(T entity)
         {
             dbContext.Set<T>().Add(entity);

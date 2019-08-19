@@ -50,6 +50,7 @@
     <Compile Include="DbContextFactory.cs" />
     <Compile Include="EntityDal\AdminUserDal.cs" />
     <Compile Include="EntityDal\ProductDal.cs" />
+    <Compile Include="EntityDal\SystemMenuDal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -60,6 +61,10 @@
     <ProjectReference Include="..\Layui-admin.Model\Layui-admin.Model.csproj">
       <Project>{80abd677-2895-4b1a-8796-97e2755154ca}</Project>
       <Name>Layui-admin.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Layui-admin.ViewModel\Layui-admin.ViewModel.csproj">
+      <Project>{860ca9c8-9ff2-4a29-8ab2-b800c4ea8cca}</Project>
+      <Name>Layui-admin.ViewModel</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

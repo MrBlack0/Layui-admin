@@ -18,5 +18,9 @@ namespace Layui_admin.Factory
         {
             return new ProductDal();
         }
+        public static ISystemMenuDal SystemMenuDalFactory()
+        {
+            return new SystemMenuDal();
+        }
     }
 }

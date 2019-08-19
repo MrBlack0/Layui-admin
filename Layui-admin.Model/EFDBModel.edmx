@@ -95,11 +95,27 @@
           <Property Name="Text4" Type="nvarchar" MaxLength="50" />
           <Property Name="Text5" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="SystemMenu">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="MenuName" Type="nvarchar" MaxLength="50" />
+          <Property Name="ParentID" Type="nvarchar" MaxLength="64" />
+          <Property Name="LinkUrl" Type="nvarchar" MaxLength="50" />
+          <Property Name="Icon" Type="nvarchar" MaxLength="20" />
+          <Property Name="IsShow" Type="bit" />
+          <Property Name="CreateUserId" Type="nvarchar" MaxLength="64" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="ModifyUserId" Type="nvarchar" MaxLength="64" />
+          <Property Name="NodifyDate" Type="datetime" />
+        </EntityType>
         <EntityContainer Name="EFDBModelStoreContainer">
           <EntitySet Name="Ad" EntityType="Self.Ad" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Admin_User" EntityType="Self.Admin_User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="News" EntityType="Self.News" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SystemMenu" EntityType="Self.SystemMenu" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -182,6 +198,7 @@
           <EntitySet Name="Admin_User" EntityType="Self.Admin_User" />
           <EntitySet Name="News" EntityType="Self.News" />
           <EntitySet Name="Product" EntityType="EFDBModel.Product" />
+          <EntitySet Name="SystemMenu" EntityType="EFDBModel.SystemMenu" />
         </EntityContainer>
         <EntityType Name="Product">
           <Key>
@@ -200,6 +217,21 @@
           <Property Name="Text3" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Text4" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Text5" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="SystemMenu">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="MenuName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ParentID" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="LinkUrl" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Icon" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="IsShow" Type="Boolean" />
+          <Property Name="CreateUserId" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifyUserId" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="NodifyDate" Type="DateTime" Precision="3" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -298,6 +330,22 @@
                 <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="ProductName" ColumnName="ProductName" />
                 <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SystemMenu">
+            <EntityTypeMapping TypeName="EFDBModel.SystemMenu">
+              <MappingFragment StoreEntitySet="SystemMenu">
+                <ScalarProperty Name="NodifyDate" ColumnName="NodifyDate" />
+                <ScalarProperty Name="ModifyUserId" ColumnName="ModifyUserId" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CreateUserId" ColumnName="CreateUserId" />
+                <ScalarProperty Name="IsShow" ColumnName="IsShow" />
+                <ScalarProperty Name="Icon" ColumnName="Icon" />
+                <ScalarProperty Name="LinkUrl" ColumnName="LinkUrl" />
+                <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+                <ScalarProperty Name="MenuName" ColumnName="MenuName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

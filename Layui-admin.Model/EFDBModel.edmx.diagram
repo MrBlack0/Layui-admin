@@ -9,6 +9,7 @@
         <EntityTypeShape EntityType="EFDBModel.Admin_User" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="EFDBModel.News" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="EFDBModel.Product" Width="1.5" PointX="6.75" PointY="1.25" />
+        <EntityTypeShape EntityType="EFDBModel.SystemMenu" Width="1.5" PointX="7" PointY="5.375" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{7EC8D444-ADC4-4D25-A82E-0AEBE7009AED}</ProjectGuid>
+    <ProjectGuid>{860CA9C8-9FF2-4A29-8AB2-B800C4EA8CCA}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Layui_admin.IDAL</RootNamespace>
-    <AssemblyName>Layui-admin.IDAL</AssemblyName>
+    <RootNamespace>Layui_admin.ViewModel</RootNamespace>
+    <AssemblyName>Layui-admin.ViewModel</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -40,23 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IBaseDal.cs" />
-    <Compile Include="IDbSession.cs" />
-    <Compile Include="IEntityDal\IAdminUserDal.cs" />
-    <Compile Include="IEntityDal\IProductDal.cs" />
-    <Compile Include="IEntityDal\ISystemMenuDal.cs" />
+    <Compile Include="SystemMenuViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup />
-  <ItemGroup>
-    <ProjectReference Include="..\Layui-admin.Model\Layui-admin.Model.csproj">
-      <Project>{80abd677-2895-4b1a-8796-97e2755154ca}</Project>
-      <Name>Layui-admin.Model</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Layui-admin.ViewModel\Layui-admin.ViewModel.csproj">
-      <Project>{860ca9c8-9ff2-4a29-8ab2-b800c4ea8cca}</Project>
-      <Name>Layui-admin.ViewModel</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

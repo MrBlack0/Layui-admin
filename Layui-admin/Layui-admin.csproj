@@ -220,6 +220,7 @@
     <Content Include="Content\layui\lay\modules\rate.js" />
     <Content Include="Content\layui\lay\modules\slider.js" />
     <Content Include="Content\layui\lay\modules\table.js" />
+    <Content Include="Content\layui\lay\modules\transfer.js" />
     <Content Include="Content\layui\lay\modules\tree.js" />
     <Content Include="Content\layui\lay\modules\upload.js" />
     <Content Include="Content\layui\lay\modules\util.js" />
@@ -239,6 +240,7 @@
     <Compile Include="Controllers\ImageCodeController.cs" />
     <Compile Include="Controllers\IndexController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\SystemMenuController.cs" />
     <Compile Include="Controllers\UploadImgController.cs" />
     <Compile Include="Controllers\UserInfoController.cs" />
     <Compile Include="Filters\MyAuthorizeAttribute.cs" />
@@ -266,11 +268,14 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Product\AddProduct.cshtml" />
     <Content Include="Config\log4net.config" />
+    <Content Include="Content\layui\font\iconfont.woff2" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <Content Include="Views\UserInfo\UserList.cshtml" />
     <Content Include="Views\UserInfo\AddUser.cshtml" />
     <Content Include="Views\UserInfo\testview.cshtml" />
     <Content Include="Views\Error\ErrorPage.cshtml" />
+    <Content Include="Views\SystemMenu\SysMenuList.cshtml" />
+    <Content Include="Views\SystemMenu\AddMenu.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -296,6 +301,10 @@
     <ProjectReference Include="..\Layui-admin.Model\Layui-admin.Model.csproj">
       <Project>{80abd677-2895-4b1a-8796-97e2755154ca}</Project>
       <Name>Layui-admin.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Layui-admin.ViewModel\Layui-admin.ViewModel.csproj">
+      <Project>{860ca9c8-9ff2-4a29-8ab2-b800c4ea8cca}</Project>
+      <Name>Layui-admin.ViewModel</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

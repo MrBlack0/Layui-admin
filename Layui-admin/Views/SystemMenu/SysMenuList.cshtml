@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     Layout = null;
 }
 
@@ -9,22 +8,15 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <link rel="stylesheet" href="~/Content/layui/css/layui.css" media="all">
-    <title>AdminUser List</title>
-
+    <title>SysMenuList List</title>
 </head>
 <body>
     <div class="layui-fluid">
-        <div class="">          
+        <div class="">
             <div class="layui-inline">
-                <span style="padding-right:15px;">用户名</span>
+                <span style="padding-right:15px;">菜单名</span>
                 <div class="layui-input-inline">
-                    <input class="layui-input" name="username" id="username" autocomplete="off">
-                </div>
-            </div>
-            <div class="layui-inline">
-                <label class="layui-form-label">邮箱</label>
-                <div class="layui-input-inline">
-                    <input class="layui-input" name="email" id="email" autocomplete="off">
+                    <input class="layui-input" name="menuname" id="menuname" autocomplete="off">
                 </div>
             </div>
             <button class="layui-btn" id="serarch" data-type="reload"><i class="layui-icon">&#xe615;</i></button>
@@ -49,13 +41,20 @@
             <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
             <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
         </script>
+        <script type="text/html" id="buttonShow">
+            {{#  if(d.IsShow == true){ }}
+            <button class="layui-btn layui-btn-xs">显示</button>
+            {{#  } else { }}
+            <button class="layui-btn layui-btn-primary layui-btn-xs">隐藏</button>
+            {{#  } }}
+        </script>
 
     </div>
 
     <script src="~/Content/layui/layui.js"></script>
     <script>
         layui.use(['table', 'layer'], function () {
-            var table = layui.table, $ = layui.jquery, layer = layui.layer, form = layui.form;;
+            var table = layui.table, $ = layui.jquery, layer = layui.layer, form = layui.form;
             Date.prototype.format = function (format) //author: meizz
             {
                 var o = {
@@ -76,47 +75,38 @@
                 return format;
             }
             var index = layer.load(1);
-            console.log('kkkkkkkkkk');
-            console.log(index);
+            
             var tbl = table.render({
                 elem: '#test'
                 , title: '菜单列表'
-                , url: '/UserInfo/GetUserList'
+                , url: '/SystemMenu/SysMenuList'
                 , loading: true //翻页加loading
-                , parseData: function (res) { //res 即为原始返回的数据
-                    return {
-                        "code": res.code, //解析接口状态
-                        "msg": res.msg, //解析提示文本
-                        "count": res.count, //解析数据长度
-                        "data": res.data //解析数据列表
-                    };
-                }
+                //, parseData: function (res) { //res 即为原始返回的数据
+                //    return {
+                //        "code": res.code, //解析接口状态
+                //        "msg": res.msg, //解析提示文本
+                //        "count": res.count, //解析数据长度
+                //        "data": res.data //解析数据列表
+                //    };
+                //}
                 , cellMinWidth: 80
                 , toolbar: '#toolbarDemo'
-                , title: '菜单数据表'
+                , title: '菜单列表'
                 , cols: [[
                     { type: 'checkbox' }
                     , { type: 'numbers' }
                     , { field: 'Id', title: 'ID', hide: true }
-                    , { field: 'UserName', title: '用户名', }
+                    , { field: 'MenuName', title: '菜单名' }
+                    , { field: 'Icon', title: '图标' }
+                    , { field: 'IsShow', title: '是否显示', width: 110, templet: '#buttonShow' }
+                    //, {
+                    //    field: 'IsShow', title: '显示', templet: function (d) {
+                    //        return d.IsShow == 1 ? '显示' : '隐藏'
+                    //    }
+                    //}
+                    , { field: 'CreateUserName', title: '创建人' }
                     , {
-                        field: 'Email', title: '邮箱', templet: function (res) {
-                            return '<em>' + res.Email + '</em>'
-                        }
-                    }
-                    , { field: 'NickName', title: '昵称' }
-                    , {
-                        field: 'Sex', title: '性别', templet: function (d) {
-                            return d.Sex == 1 ? '男' : '女'
-                        }
-                    }
-                    //, { field: 'Sex', title: '性别', width: 85, templet: '#switchTpl', unresize: true }
-                    , { field: 'Introduce', title: '自我介绍' }
-                    , { field: 'City', title: '城市' }
-                    , { field: 'LoginIp', title: 'IP' }
-                    , { field: 'DeleteMark', title: '是否删除', width: 110, templet: '#checkboxTpl' }
-                    , {
-                        field: 'CreateDate', title: '加入时间', sort: true, templet: function (d) {
+                        field: 'CreateDate', title: '创建时间', sort: true, templet: function (d) {
                             return new Date(parseInt(d.CreateDate.substr(6, 13))).format('yyyy-MM-dd hh:mm:ss');
                         }
                     }
@@ -142,7 +132,6 @@
                     console.log(count);
                 }
             });
-
             //table搜索
             $('#serarch').click(function () {
                 reload();
@@ -160,7 +149,7 @@
                         // var chks = JSON.stringify(data)
                         var ids = [];
                         data.forEach((item, index, array) => {
-                            ids.push(item.Id);
+                            ids.push(item.ID);
                         });
                         //删除多条
                         deletes(ids);
@@ -183,35 +172,39 @@
                 if (obj.event === 'del') {
                     layer.confirm('真的删除行么', function (index) {
                         //删除
-                        $.ajax({
-                            type: "post",
-                            url: '/UserInfo/DelteUserByid',
-                            data: { "userid": obj.data.Id },
-                            dataType: "json",
-                            success: function (data) {
-                                //列表移除
-                                obj.del();
-                                layer.close(index);
-                                layer.msg(data.msg);
-                            },
-                            error: function () {
-                                alert("Post请求发生异常！");
-                            }
-                        });
+                        var ids = [];
+                        ids.push(obj.data.ID);
+                        deletes(ids);
+                        //列表移除
+                        obj.del();
+                        //$.ajax({
+                        //    type: "post",
+                        //    url: '/UserInfo/DelteUserByid',
+                        //    data: { "userid": obj.data.Id },
+                        //    dataType: "json",
+                        //    success: function (data) {
+                        //        //列表移除
+                        //        obj.del();
+                        //        layer.close(index);
+                        //        layer.msg(data.msg);
+                        //    },
+                        //    error: function () {
+                        //        alert("Post请求发生异常！");
+                        //    }
+                        //});
                     });
                 } else if (obj.event === 'edit') {
                     layer.open({
                         type: 2
-                        , title: '添加用户'
-                        , content: "http://" + window.location.host + "/UserInfo/EditUser?id=" + obj.data.Id
+                        , title: '编辑菜单'
+                        , content: "http://" + window.location.host + "/SystemMenu/GetMenuById?id=" + obj.data.ID
                         , maxmin: true
-                        , area: ['60%', '70%']
+                        , area: ['400px', '400px']
                         , offset: 't'
                         , btn: ['确定', '取消']
                         , yes: function (index, layero) {
-                            console.log('hello,ifram');
                             var iframeWindow = window['layui-layer-iframe' + index]
-                                , submitID = 'addUser'
+                                , submitID = 'addMenu'
                                 , submit = layero.find('iframe').contents().find('#' + submitID);
                             //监听提交
                             iframeWindow.layui.form.on('submit(' + submitID + ')', function (data) {
@@ -220,7 +213,7 @@
                                 //提交 Ajax 成功后，静态更新表格中的数据
                                 $.ajax({
                                     type: "post",
-                                    url: '/UserInfo/EditUser',
+                                    url: '/SystemMenu/EditMenu',
                                     data: field,
                                     dataType: "json",
                                     success: function (data) {
@@ -230,27 +223,14 @@
                                         alert("Post请求发生异常！");
                                     }
                                 });
-                                table.reload('test'); //数据刷新
+                                reload();//数据刷新
                                 layer.close(index); //关闭弹层
                             });
 
                             submit.trigger('click');
                         }
                     });
-
-
-
-
-
-                    //layer.prompt({
-                    //    formType: 2
-                    //    , value: data.email
-                    //}, function (value, index) {
-                    //    obj.update({
-                    //        email: value
-                    //    });
-                    //    layer.close(index);
-                    //});
+                    
                 }
             });
 
@@ -263,15 +243,15 @@
             function add() {
                 layer.open({
                     type: 2
-                    , title: '添加用户'
-                    , content: "http://" + window.location.host + "/UserInfo/AddUser"
+                    , title: '添加菜单'
+                    , content: "http://" + window.location.host + "/SystemMenu/AddMenu"
                     , maxmin: true
-                    , area: ['800px', '500px']
+                    , area: ['400px', '400px']
                     , offset: 't'
                     , btn: ['确定', '取消']
                     , yes: function (index, layero) {
                         var iframeWindow = window['layui-layer-iframe' + index]
-                            , submitID = 'addUser'
+                            , submitID = 'addMenu'
                             , submit = layero.find('iframe').contents().find('#' + submitID);
                         //监听提交
                         iframeWindow.layui.form.on('submit(' + submitID + ')', function (data) {
@@ -280,18 +260,18 @@
                             //提交 Ajax 成功后，静态更新表格中的数据
                             $.ajax({
                                 type: "post",
-                                url: '/UserInfo/AddUser',
+                                url: '/SystemMenu/addMenu',
                                 data: field,
                                 dataType: "json",
                                 success: function (data) {
+                                    layer.close(index); //关闭弹层
+                                    reload();
                                     layer.msg(data.msg);
                                 },
                                 error: function () {
                                     alert("Post请求发生异常！");
                                 }
                             });
-                            reload();
-                            layer.close(index); //关闭弹层
                         });
 
                         submit.trigger('click');
@@ -302,7 +282,7 @@
             function deletes(ids) {
                 $.ajax({
                     type: "post",
-                    url: '/UserInfo/DeleteUsers',
+                    url: '/SystemMenu/DeleteMenus',
                     data: { "ids": ids },
                     dataType: "json",
                     success: function (data) {
@@ -319,13 +299,12 @@
             function reload() {
                 tbl.reload({
                     where: {
-                        username: $('#username').val(),
-                        email: $('#email').val()
+                        menuname: $('#menuname').val()
                     },//设定异步数据接口的额外参数，任意设
                     page: {
                         curr: 1,////重新从第 1 页开始
                         limit: 10
-                    } 
+                    }
                 });
             }
         });

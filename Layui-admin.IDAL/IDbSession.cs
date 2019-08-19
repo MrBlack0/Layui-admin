@@ -13,6 +13,7 @@ namespace Layui_admin.IDAL
         //INewsDal NewsDal { get; }
         IAdminUserDal AdminUserDal { get; }
         IProductDal ProductDal { get; }
+        ISystemMenuDal SystemMenuDal { get; }
         int SaveChanges();
     }
 }

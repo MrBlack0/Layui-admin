@@ -1,0 +1,98 @@
+﻿@model Layui_admin.Model.SystemMenu
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="~/Content/layui/css/layui.css" media="all">
+    <script src="~/Content/layui/layui.js"></script>
+    <title>AddMenu</title>
+</head>
+<body>
+    <form class="layui-form" action="" lay-filter="example" style="padding:15px;">
+        <div class="layui-form-item layui-hide">
+            <input type="text" id="Id" name="Id" value="">
+        </div>
+        <div class="layui-form-item layui-hide">
+            <input type="text" id="ids" value="">
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">父菜单</label>
+            <div class="layui-input-inline">
+                <select id="menus" name="parentid" lay-verify="">
+                    <option value="">栏目菜单</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">菜单名</label>
+            <div class="layui-input-inline">
+                <input type="text" name="menuName" value="@Model.MenuName" autocomplete="off" lay-verify="required" placeholder="请输入菜单名" lay-reqtext="菜单名是必填项，岂能为空？" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">Icon</label>
+            <div class="layui-input-inline">
+                <input type="text" name="icon" placeholder="请选择图标" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">LinkUrl</label>
+            <div class="layui-input-inline">
+                <input type="text" name="linkUrl" lay-verify="required" placeholder="请输入uri" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">是否显示</label>
+            <div class="layui-input-inline">
+                <input type="checkbox" name="isShow" value=true lay-skin="switch" lay-text="显示|隐藏">
+            </div>
+        </div>
+        <div class="layui-form-item layui-hide">
+            <input type="button" lay-submit lay-filter="addMenu" id="addMenu" value="确认">
+        </div>
+        <script>
+            layui.use(['form', 'upload'], function () {
+                var form = layui.form, $ = layui.jquery;
+                $.ajax({
+                    type: "get",
+                    url: '/SystemMenu/GetAllMenu',
+                    dataType: "json",
+                    success: function (data) {
+                        //layer.msg(data.msg);
+                        $.each(data.data, function (index, item) {
+                            if (item.ID == "@Model.ParentID") {
+                                $('#menus').append(new Option(item.MenuName, item.ID, false, true));// 下拉菜单里添加元素
+                            }
+                            else {
+                                $('#menus').append(new Option(item.MenuName, item.ID));// 下拉菜单里添加元素
+                            }
+                        });
+                        layui.form.render("select");
+                    },
+                    error: function () {
+                        alert("Post请求发生异常！");
+                    }
+                });
+                if ("@Model.ID") {
+                    //表单初始赋值
+                    form.val('example', {
+                        "Id": "@Model.ID"
+                        ,"menuName": "@Model.MenuName" // "name": "value"
+                        , "linkUrl": "@Model.LinkUrl"
+                        , "icon": "@Model.Icon"
+                        ,"isShow":"@Model.IsShow"
+                        , "parentid": "@Model.ParentID"
+                        , "like[write]": "@Model.IsShow" //复选框选中状态
+                    });
+                }
+            });
+        </script>
+    </form>
+
+</body>
+</html>

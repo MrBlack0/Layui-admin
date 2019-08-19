@@ -29,5 +29,6 @@ namespace Layui_admin.Model
         public virtual DbSet<Admin_User> Admin_User { get; set; }
         public virtual DbSet<News> News { get; set; }
         public virtual DbSet<Product> Product { get; set; }
+        public virtual DbSet<SystemMenu> SystemMenu { get; set; }
     }
 }

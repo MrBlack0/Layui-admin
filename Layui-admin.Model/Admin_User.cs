@@ -21,9 +21,6 @@ namespace Layui_admin.Model
         public string PassWord { get; set; }
         public string Email { get; set; }
         public string Phone { get; set; }
-        /// <summary>
-        /// 性别（1-男；2-女）
-        /// </summary>
         public int Sex { get; set; }
         public string Photo { get; set; }
         public int Age { get; set; }

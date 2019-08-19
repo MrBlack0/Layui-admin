@@ -13,6 +13,8 @@ namespace Layui_admin.Factory
     {
         public IAdminUserDal AdminUserDal => DalFactory.AdminUserDalFactory();
         public IProductDal ProductDal => DalFactory.ProductDalFactory();
+
+        public ISystemMenuDal SystemMenuDal => DalFactory.SystemMenuDalFactory();
         #region 抽象工厂
         //public IAdDal AdDal { get { return DalFactory.AdDalFactory(); } }
         //public INewsDal NewsDal { get { return DalFactory.NewsDalFactory(); } }

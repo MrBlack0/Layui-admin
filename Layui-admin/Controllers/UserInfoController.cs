@@ -85,8 +85,6 @@ namespace Layui_admin.Controllers
         [HttpGet]
         public ActionResult GetUserList(string username, string email, int page = 1, int limit = 10)
         {
-            int n = 0;
-            int res = 9 / n;
             var result = ResModelFactory.ResDefaultData<Admin_User>();
             AdminUserService service = new AdminUserService();
             int count = 0;

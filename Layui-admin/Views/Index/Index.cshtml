@@ -117,7 +117,8 @@
                     <li class="layui-nav-item layui-nav-itemed">
                         <a class="" href="javascript:;">所有商品</a>
                         <dl class="layui-nav-child">
-                            <dd><a id="001" data-url="/Product/Index" href="javascript:;">产品列表</a></dd>
+                            <dd><a id="001" data-url="/SystemMenu/List" href="javascript:;">菜单管理</a></dd>
+                            <dd><a id="002" data-url="/Product/Index" href="javascript:;">产品列表</a></dd>
                             <dd><a id="003" data-url="/UserInfo/List" href="javascript:;">用户列表</a></dd>
                             <dd><a href="">超链接</a></dd>
                         </dl>
@@ -143,7 +144,7 @@
                     <ul class="layui-tab-title">
                         <li class="layui-this first-tab">首页</li>
                     </ul>
-                    <div class="layui-tab-content" style="background-color:#f2f2f2">
+                    <div class="layui-tab-content" style="background-color:#f2f2f2;overflow:hidden">
                         <div class="layui-tab-item layui-show">
 
 
@@ -589,10 +590,10 @@
         //*/
         function setIframeHeight(iframe) {
             if (iframe) {
-                var iframeWin = iframe.contentWindow || iframe.contentDocument.parentWindow;
-                if (iframeWin.document.body) {
-                    iframe.height = iframeWin.document.documentElement.scrollHeight || iframeWin.document.body.scrollHeight;
-                }
+                //var iframeWin = iframe.contentWindow || iframe.contentDocument.parentWindow;
+                //if (iframeWin.document.body) {
+                //    iframe.height = iframeWin.document.documentElement.scrollHeight || iframeWin.document.body.scrollHeight;
+                //}
             }
         };
     </script>
