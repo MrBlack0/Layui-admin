@@ -45,7 +45,7 @@ namespace Layui_admin.EFDAL
         public bool Delete(T entity)
         {
             dbContext.Entry(entity).State = System.Data.Entity.EntityState.Deleted;
-            //return dbContext.SaveChanges() > 0;
+            //return dbContext.SaveChanges() > 0; 
             return true;
         }
         public IQueryable<T> GetEntitys(Expression<Func<T, bool>> whereLambda)
