@@ -24,5 +24,6 @@ namespace Layui_admin.Model
         public Nullable<System.DateTime> CreateDate { get; set; }
         public string ModifyUserId { get; set; }
         public Nullable<System.DateTime> NodifyDate { get; set; }
+        public Nullable<int> Sort { get; set; }
     }
 }

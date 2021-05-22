@@ -35,6 +35,12 @@
             </div>
         </div>
         <div class="layui-form-item">
+            <label class="layui-form-label">排序</label>
+            <div class="layui-input-inline">
+                <input type="number" min="0" name="sort" placeholder="请选择排序" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
             <label class="layui-form-label">Icon</label>
             <div class="layui-input-inline">
                 <input type="text" name="icon" placeholder="请选择图标" autocomplete="off" class="layui-input">
@@ -84,6 +90,7 @@
                         "Id": "@Model.ID"
                         ,"menuName": "@Model.MenuName" // "name": "value"
                         , "linkUrl": "@Model.LinkUrl"
+                        , "sort": "@Model.Sort"
                         , "icon": "@Model.Icon"
                         ,"isShow":"@Model.IsShow"
                         , "parentid": "@Model.ParentID"

@@ -9,12 +9,14 @@ using Layui_admin.IDAL.IEntityDal;
 
 namespace Layui_admin.Factory
 {
-    public class DbSession: IDbSession
+    public class DbSession : IDbSession
     {
         public IAdminUserDal AdminUserDal => DalFactory.AdminUserDalFactory();
         public IProductDal ProductDal => DalFactory.ProductDalFactory();
 
         public ISystemMenuDal SystemMenuDal => DalFactory.SystemMenuDalFactory();
+        public ISystemRoleDal SystemRoleDal => DalFactory.SystemRoleDalFactory();
+        public ISystemRoleValueDal SystemRoleValueDal => DalFactory.SystemRoleValueDalFactory();
         #region 抽象工厂
         //public IAdDal AdDal { get { return DalFactory.AdDalFactory(); } }
         //public INewsDal NewsDal { get { return DalFactory.NewsDalFactory(); } }

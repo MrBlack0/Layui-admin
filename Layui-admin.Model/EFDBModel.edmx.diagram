@@ -4,12 +4,15 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="eab669d2aede4bd7872b3ca2c90e6e7b" Name="Diagram1">
+      <Diagram DiagramId="eab669d2aede4bd7872b3ca2c90e6e7b" Name="Diagram1" ZoomLevel="56">
         <EntityTypeShape EntityType="EFDBModel.Ad" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="EFDBModel.Admin_User" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="EFDBModel.News" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="EFDBModel.Product" Width="1.5" PointX="6.75" PointY="1.25" />
         <EntityTypeShape EntityType="EFDBModel.SystemMenu" Width="1.5" PointX="7" PointY="5.375" />
+        <EntityTypeShape EntityType="EFDBModel.SystemRole" Width="1.5" PointX="9.375" PointY="0.75" />
+        <EntityTypeShape EntityType="EFDBModel.test" Width="1.5" PointX="9.375" PointY="3.75" />
+        <EntityTypeShape EntityType="EFDBModel.SystemRoleValue" Width="1.5" PointX="0.75" PointY="7.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

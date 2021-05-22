@@ -13,7 +13,7 @@ namespace Layui_admin.Models
     }
     public class ResModel<T>
     {
-        public int code { get; set; }
+        public string code { get; set; }
         public string msg { get; set; }
         public int count { get; set; }
         public T[] data { get; set; }
@@ -40,7 +40,7 @@ namespace Layui_admin.Models
         {
             return new ResModel<T>()
             {
-                code = 0,
+                code = "000",
                 msg = "success",
                 count = 0,
                 data = null

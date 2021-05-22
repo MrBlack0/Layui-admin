@@ -51,6 +51,8 @@
     <Compile Include="EntityDal\AdminUserDal.cs" />
     <Compile Include="EntityDal\ProductDal.cs" />
     <Compile Include="EntityDal\SystemMenuDal.cs" />
+    <Compile Include="EntityDal\SystemRoleDal.cs" />
+    <Compile Include="EntityDal\SystemRoleValueDal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

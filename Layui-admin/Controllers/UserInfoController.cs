@@ -3,6 +3,7 @@ using Layui_admin.Common;
 using Layui_admin.jwt;
 using Layui_admin.Model;
 using Layui_admin.Models;
+using Layui_admin.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,7 +33,7 @@ namespace Layui_admin.Controllers
         public ActionResult Login(string userName, string password, string imageCode)
         {
             // 验证码
-            var result = ResModelFactory.ResDefault();
+            var result = ResModelFactory.ResDefaultData<Admin_User>();
             string code = Session["ImageCode"].ToString();
             if (!code.Equals(imageCode))
             {
@@ -50,7 +51,8 @@ namespace Layui_admin.Controllers
                 return Json(result, JsonRequestBehavior.AllowGet);
             }
             string token = JwtHelper.SetJwtEncode(userName, password);
-            result.token = token;
+            //result.token = token;
+            result.data = new List<Admin_User> { user }.ToArray();
             //服务端存储
             //客户端存储cookie
             System.Web.HttpCookie cookie = new System.Web.HttpCookie("authorize", token);
@@ -85,23 +87,24 @@ namespace Layui_admin.Controllers
         [HttpGet]
         public ActionResult GetUserList(string username, string email, int page = 1, int limit = 10)
         {
-            var result = ResModelFactory.ResDefaultData<Admin_User>();
+            var result = ResModelFactory.ResDefaultData<SystemUserInfoViewModel>();
             AdminUserService service = new AdminUserService();
             int count = 0;
-            Expression<Func<Admin_User, bool>> where = p => true;
-            if (!string.IsNullOrEmpty(username) && !string.IsNullOrEmpty(email))
-            {
-                where = p => p.UserName == username & p.Email == email;
-            }
-            else if (!string.IsNullOrEmpty(username) && string.IsNullOrEmpty(email))
-            {
-                where = p => p.UserName == username;
-            }
-            else if (string.IsNullOrEmpty(username) && !string.IsNullOrEmpty(email))
-            {
-                where = p => p.Email == email;
-            }
-            var list = service.GetPages(limit, page, out count, where, o => o.CreateDate, false);
+            //Expression<Func<Admin_User, bool>> where = p => true;
+            //if (!string.IsNullOrEmpty(username) && !string.IsNullOrEmpty(email))
+            //{
+            //    where = p => p.UserName == username & p.Email == email;
+            //}
+            //else if (!string.IsNullOrEmpty(username) && string.IsNullOrEmpty(email))
+            //{
+            //    where = p => p.UserName == username;
+            //}
+            //else if (string.IsNullOrEmpty(username) && !string.IsNullOrEmpty(email))
+            //{
+            //    where = p => p.Email == email;
+            //}
+            //var list = service.GetPages(limit, page, out count, where, o => o.CreateDate, false);
+            var list = service.GetSysUsers(username, email, page, limit, out count);
             result.count = count;
             result.data = list.ToArray();
             return Json(result, JsonRequestBehavior.AllowGet);
@@ -134,10 +137,11 @@ namespace Layui_admin.Controllers
                 model.Brithday = entity.Brithday;
                 model.Sex = entity.Sex;
                 model.Introduce = entity.Introduce;
-
+                model.RoleID = entity.RoleID;
                 model.ModifyUserID = CurrentUser.Id;
                 model.ModifyUserName = CurrentUser.UserName;
                 model.UpdateDate = DateTime.Now;
+                model.DeleteMark = entity.DeleteMark;
                 var user = service.Update(model);
             }
             catch (Exception ex)
@@ -157,8 +161,8 @@ namespace Layui_admin.Controllers
                 entity.CreateUserID = CurrentUser.Id;
                 entity.CreateUserName = CurrentUser.UserName;
                 entity.DeleteMark = false;
-                entity.Sex = 1;
-                entity.Age = 23;
+                //entity.Sex = 1;
+                //entity.Age = 23;
                 AdminUserService service = new AdminUserService();
                 service.Add(entity);
 
@@ -169,7 +173,23 @@ namespace Layui_admin.Controllers
             }
             return Json(result, JsonRequestBehavior.AllowGet);
         }
-
+        [HttpGet]
+        public ActionResult GetAllRoles()
+        {
+            var result = ResModelFactory.ResDefaultData<SystemRole>();
+            try
+            {
+                SystemRoleService service = new SystemRoleService();
+                var list = service.GetEntitys(p => true);
+                result.data = list.ToArray();
+            }
+            catch (Exception ex)
+            {
+                result.code = "999";
+                result.msg = ex.Message;
+            }
+            return Json(result, JsonRequestBehavior.AllowGet); ;
+        }
         public ActionResult UploadAvator(string userid)
         {
             if (string.IsNullOrEmpty(userid))
@@ -232,6 +252,15 @@ namespace Layui_admin.Controllers
 
             int n = service.ExcuteSqlParm(sql, obj);
             return Json(new { code = 0, msg = "success" });
+        }
+
+        public ActionResult CurrentUserInfo()
+        {
+            return View("CurrentUserInfo", CurrentUser);
+        }
+        public ActionResult ChangePwd()
+        {
+            return View();
         }
     }
 }

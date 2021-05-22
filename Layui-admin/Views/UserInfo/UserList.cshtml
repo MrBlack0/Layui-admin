@@ -99,21 +99,20 @@
                     , { type: 'numbers' }
                     , { field: 'Id', title: 'ID', hide: true }
                     , { field: 'UserName', title: '用户名', }
+                    , { field: 'NickName', title: '昵称' }
+                    , { field: 'RoleName', title: '角色', }
                     , {
                         field: 'Email', title: '邮箱', templet: function (res) {
                             return '<em>' + res.Email + '</em>'
                         }
                     }
-                    , { field: 'NickName', title: '昵称' }
                     , {
-                        field: 'Sex', title: '性别', templet: function (d) {
+                        field: 'Sex', title: '性别', width: 60, templet: function (d) {
                             return d.Sex == 1 ? '男' : '女'
                         }
                     }
                     //, { field: 'Sex', title: '性别', width: 85, templet: '#switchTpl', unresize: true }
                     , { field: 'Introduce', title: '自我介绍' }
-                    , { field: 'City', title: '城市' }
-                    , { field: 'LoginIp', title: 'IP' }
                     , { field: 'DeleteMark', title: '是否删除', width: 110, templet: '#checkboxTpl' }
                     , {
                         field: 'CreateDate', title: '加入时间', sort: true, templet: function (d) {

@@ -1,0 +1,251 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="~/Content/layui/css/layui.css" media="all">
+    <title>SysRoleList</title>
+</head>
+<body>
+    <div class="layui-fluid">
+        <div class="">
+            <div class="layui-inline">
+                <span style="padding-right:15px;">角色名</span>
+                <div class="layui-input-inline">
+                    <input class="layui-input" name="rolename" id="rolename" autocomplete="off">
+                </div>
+            </div>
+            <button class="layui-btn" id="serarch" data-type="reload"><i class="layui-icon">&#xe615;</i></button>
+        </div>
+
+        <table class="layui-hide" id="roleList" lay-filter="roleList"></table>
+        @*<div id="pagetest"></div>*@
+
+        <script type="text/html" id="toolbarDemo">
+            <div class="layui-btn-container">
+                <button class="layui-btn layui-btn-sm" lay-event="add">增加</button>
+                <button class="layui-btn layui-btn-sm layui-btn-danger" lay-event="deletes">删除已选</button>
+            </div>
+        </script>
+        <script type="text/html" id="barDemo">
+            <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+            <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+        </script>
+    </div>
+
+    <script src="~/Content/layui/layui.js"></script>
+    <script>
+        layui.use(['table', 'layer'], function () {
+            var table = layui.table, $ = layui.jquery, layer = layui.layer, form = layui.form;
+
+            var index = layer.load(1);
+
+            var tbl = table.render({
+                elem: '#roleList'
+                , title: '角色列表'
+                , url: '/SystemRole/GetRoleList'
+                , loading: true //翻页加loading
+                , cellMinWidth: 80
+                , toolbar: '#toolbarDemo'
+                , cols: [[
+                    { type: 'checkbox' }
+                    , { type: 'numbers' }
+                    , { field: 'ID', title: 'ID', hide: true }
+                    , { field: 'RoleName', title: '角色名' }
+                    , {
+                        field: 'RoleType', title: '角色类型', templet: function (d) {
+                            return d.RoleType == 1 ? '<span style="color:red;font-weight:bold">超管<span>' : '普通'
+                        }
+                    }
+                    , { field: 'Description', title: '说明' }
+                    , { fixed: 'right', title: '操作', toolbar: '#barDemo' }
+                ]]
+                , page: {
+                    limit: 10,
+                    limits: [10, 20, 50, 100],
+                    curr: 1,
+                    groups: 5
+                },
+                done: function (res, curr, count) {
+                    //如果是异步请求数据方式，res即为你接口返回的信息。
+                    //如果是直接赋值的方式，res即为：{data: [], count: 99} data为当前页数据、count为数据总长度
+                    //console.log(res);
+                    //console.log('4564545');
+                    layer.close(index);//关闭加载
+
+                    //得到当前页码
+                    //console.log(curr);
+
+                    //得到数据总量
+                    //console.log(count);
+                }
+            });
+            //table搜索
+            $('#serarch').click(function () {
+                reload();
+            });
+
+            //工具栏事件
+            table.on('toolbar(roleList)', function (obj) {
+                var checkStatus = table.checkStatus(obj.config.id);
+                switch (obj.event) {
+                    case 'add':
+                        console.log('add  78989role');
+                        add();
+                        break;
+                    case 'deletes':
+                        var data = checkStatus.data;
+                        // var chks = JSON.stringify(data)
+                        var ids = [];
+                        data.forEach((item, index, array) => {
+                            ids.push(item.ID);
+                        });
+                        //删除多条
+                        deletes(ids);
+                        break;
+                };
+            });
+
+            //监听行工具事件
+            table.on('tool(roleList)', function (obj) {
+                var data = obj.data;
+                if (obj.event === 'del') {
+                    layer.confirm('真的删除行么', function (index) {
+                        //删除
+                        var ids = [];
+                        ids.push(obj.data.ID);
+                        deletes(ids);
+                        //列表移除
+                        obj.del();
+                    });
+                } else if (obj.event === 'edit') {
+                    layer.open({
+                        type: 2
+                        , title: '编辑菜单'
+                        , content: "http://" + window.location.host + "/SystemRole/GetRoleValues?roleId=" + obj.data.ID
+                        , maxmin: true
+                        , area: ['400px', '400px']
+                        , offset: 't'
+                        , btn: ['确定', '取消']
+                        , yes: function (index, layero) {
+                            var iframeWindow = window['layui-layer-iframe' + index]
+                                , submitID = 'addRole'
+                                , submit = layero.find('iframe').contents().find('#' + submitID);
+                            //监听提交
+                            var tree = iframeWindow.layui.util.event["lay-demo"].getChecked();
+                            iframeWindow.layui.form.on('submit(' + submitID + ')', function (data) {
+                                var field = data.field; //获取提交的字段
+                                console.log(field);
+                                field.treedata = tree;
+                                //提交 Ajax 成功后，静态更新表格中的数据
+                                $.ajax({
+                                    type: "post",
+                                    url: '/SystemRole/EditRole',
+                                    data: field,
+                                    dataType: "json",
+                                    success: function (data) {
+                                        layer.msg(data.msg);
+                                    },
+                                    error: function () {
+                                        alert("Post请求发生异常！");
+                                    }
+                                });
+                                reload();//数据刷新
+                                layer.close(index); //关闭弹层
+                            });
+
+                            submit.trigger('click');
+                        }
+                    });
+
+                }
+            });
+
+            //监听锁定操作
+            form.on('checkbox(lockDemo)', function (obj) {
+                layer.tips(this.value + ' ' + this.name + '：' + obj.elem.checked, obj.othis);
+            });
+
+            //添加
+            function add() {
+                layer.open({
+                    type: 2
+                    , title: '添加角色'
+                    , content: "http://" + window.location.host + "/SystemRole/AddRole"
+                    , maxmin: true
+                    , area: ['100%', '100%']
+                    , offset: 't'
+                    , btn: ['确定', '取消']
+                    , yes: function (index, layero) {
+                        var iframeWindow = window['layui-layer-iframe' + index]
+                            , submitID = 'addRole'
+                            , submit = layero.find('iframe').contents().find('#' + submitID);
+                        //监听提交
+                        console.log('开始获取tree值');
+                        var tree = iframeWindow.layui.util.event["lay-demo"].getChecked();
+                        console.log(1123456)
+                        console.log(tree);
+                        iframeWindow.layui.form.on('submit(' + submitID + ')', function (data) {
+                            var field = data.field; //获取提交的字段
+                            field.treedata = tree;
+                            //提交 Ajax 成功后，静态更新表格中的数据
+                            $.ajax({
+                                type: "post",
+                                url: '/SystemRole/addRole',
+                                data: field,
+                                dataType: "json",
+                                success: function (data) {
+                                    layer.close(index); //关闭弹层
+                                    reload();
+                                    layer.msg(data.msg);
+                                },
+                                error: function () {
+                                    alert("Post请求发生异常！");
+                                }
+                            });
+                        });
+
+                        submit.trigger('click');
+                    }
+                });
+            }
+            //删除已选
+            function deletes(ids) {
+                $.ajax({
+                    type: "post",
+                    url: '/SystemRole/DeleteRoles',
+                    data: { "ids": ids },
+                    dataType: "json",
+                    success: function (data) {
+                        //列表移除
+                        layer.msg(data.msg);
+                        reload();
+                    },
+                    error: function () {
+                        alert("Post请求发生异常！");
+                    }
+                });
+            }
+
+            function reload() {
+                tbl.reload({
+                    where: {
+                        rolename: $('#rolename').val()
+                    },//设定异步数据接口的额外参数，任意设
+                    page: {
+                        curr: 1,////重新从第 1 页开始
+                        limit: 10
+                    }
+                });
+            }
+        });
+
+
+    </script>
+</body>
+</html>

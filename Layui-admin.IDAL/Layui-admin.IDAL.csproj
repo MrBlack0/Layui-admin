@@ -45,6 +45,8 @@
     <Compile Include="IEntityDal\IAdminUserDal.cs" />
     <Compile Include="IEntityDal\IProductDal.cs" />
     <Compile Include="IEntityDal\ISystemMenuDal.cs" />
+    <Compile Include="IEntityDal\ISystemRoleDal.cs" />
+    <Compile Include="IEntityDal\ISystemRoleValueDal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

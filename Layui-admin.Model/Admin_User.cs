@@ -23,12 +23,8 @@ namespace Layui_admin.Model
         public string Phone { get; set; }
         public int Sex { get; set; }
         public string Photo { get; set; }
-        public int Age { get; set; }
         public Nullable<System.DateTime> Brithday { get; set; }
         public string Introduce { get; set; }
-        public string Country { get; set; }
-        public Nullable<int> Province { get; set; }
-        public Nullable<int> City { get; set; }
         public string Address { get; set; }
         public string LoginIp { get; set; }
         public string RoleID { get; set; }

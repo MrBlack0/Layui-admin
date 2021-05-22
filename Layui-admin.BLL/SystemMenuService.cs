@@ -16,7 +16,7 @@ namespace Layui_admin.BLL
         }
         public IQueryable<SystemMenuViewModel> GetSystemMenuBypage(int limit, int page, string menuName, out int count)
         {
-            return this.DbSession.SystemMenuDal.GetSystemMenu(limit, page, menuName, out count);
+            return this.DbSession.SystemMenuDal.GetSystemMenusByPage(limit, page, menuName, out count);
         }
     }
 }

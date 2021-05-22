@@ -80,6 +80,15 @@
     <Compile Include="SystemMenu.cs">
       <DependentUpon>EFDBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="SystemRole.cs">
+      <DependentUpon>EFDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SystemRoleValue.cs">
+      <DependentUpon>EFDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="test.cs">
+      <DependentUpon>EFDBModel.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="EFDBModel.edmx">

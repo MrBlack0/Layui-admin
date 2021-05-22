@@ -114,19 +114,21 @@
 
         layui.use(['form', 'layer'], function () {
             var form = layui.form, $ = layui.jquery, layer = layui.layer;
-            //监听提交
+            
             form.on('submit(formDemo)', function (data) {
                 //layer.alert(JSON.stringify(data.field), {
                 //    title: '最终的提交信息'
                 //})
-                login(data);
+                //监听提交
+                var index = layer.load(1);
+                login(data,index);
                 return false;
             });
             $(function () {
                 reach();
                 setImgCode();
             });
-            function login(data) {
+            function login(data,index) {
                 $.ajax({
                     type: "post",
                     url: '/UserInfo/Login',
@@ -139,6 +141,7 @@
                             layer.msg(data.msg);
                             setImgCode();
                         }
+                        layer.close(index);//关闭加载
                     },
                     error: function () {
                         alert("Post请求发生异常！");
@@ -157,7 +160,8 @@
                 }
             }
             function setImgCode() {
-                $("#imgcode").attr("src", "http://" + window.location.host + "/ImageCode/GetImage?r=" + Math.random());
+                //$("#imgcode").attr("src", "http://" + window.location.host + "/ImageCode/GetImage?r=" + Math.random());
+                $("#imgcode").attr("src", "/ImageCode/GetImage?r=" + Math.random());
                 $("#verifyCode").val("");
             }
             $('#imgcode').click(function () {

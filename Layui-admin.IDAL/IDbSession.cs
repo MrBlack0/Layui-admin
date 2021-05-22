@@ -14,6 +14,8 @@ namespace Layui_admin.IDAL
         IAdminUserDal AdminUserDal { get; }
         IProductDal ProductDal { get; }
         ISystemMenuDal SystemMenuDal { get; }
+        ISystemRoleDal SystemRoleDal { get; }
+        ISystemRoleValueDal SystemRoleValueDal { get; }
         int SaveChanges();
     }
 }

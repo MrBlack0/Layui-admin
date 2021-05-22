@@ -42,6 +42,11 @@
   <ItemGroup>
     <Compile Include="SystemMenuViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SystemRoleValueViewModel.cs" />
+    <Compile Include="SystemURoleMenuViewModel.cs" />
+    <Compile Include="SystemUserInfoViewModel.cs" />
+    <Compile Include="SystemUserMenuViewModel.cs" />
+    <Compile Include="TreeDataViewModel.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -114,6 +114,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\images\user.jpg" />
     <Content Include="Content\images\8.jpg" />
     <Content Include="Content\js\common.js" />
     <Content Include="Content\js\echarts\echarts.js" />
@@ -241,6 +242,7 @@
     <Compile Include="Controllers\IndexController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\SystemMenuController.cs" />
+    <Compile Include="Controllers\SystemRoleController.cs" />
     <Compile Include="Controllers\UploadImgController.cs" />
     <Compile Include="Controllers\UserInfoController.cs" />
     <Compile Include="Filters\MyAuthorizeAttribute.cs" />
@@ -250,10 +252,12 @@
     </Compile>
     <Compile Include="jwt\JwtHelper.cs" />
     <Compile Include="Models\LoginPaylod.cs" />
+    <Compile Include="Models\RoleAndRloeValues.cs" />
     <Compile Include="Models\UsersMemory.cs" />
     <Compile Include="Models\ResModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
+    <Compile Include="Views\TestResultController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
@@ -276,6 +280,10 @@
     <Content Include="Views\Error\ErrorPage.cshtml" />
     <Content Include="Views\SystemMenu\SysMenuList.cshtml" />
     <Content Include="Views\SystemMenu\AddMenu.cshtml" />
+    <Content Include="Views\SystemRole\SysRoleList.cshtml" />
+    <Content Include="Views\SystemRole\AddRole.cshtml" />
+    <Content Include="Views\UserInfo\CurrentUserInfo.cshtml" />
+    <Content Include="Views\UserInfo\ChangePwd.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -287,6 +295,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Views\Base\" />
     <Folder Include="Views\ImageCode\" />
+    <Folder Include="Views\TestResult\" />
     <Folder Include="Views\UploadImg\" />
   </ItemGroup>
   <ItemGroup>

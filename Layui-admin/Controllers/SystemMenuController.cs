@@ -105,7 +105,7 @@ namespace Layui_admin.Controllers
             {
                 return Json(new { code = 999, msg = "参数有误" });
             }
-            AdminUserService service = new AdminUserService();
+            SystemMenuService service = new SystemMenuService();
             object[] obj = new object[ids.Length];
             string parms = SqlParameterHelper.GetParameters(ids, ref obj);
             string sql = $"delete from SystemMenu where id in({parms})";

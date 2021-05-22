@@ -35,12 +35,8 @@
           <Property Name="Phone" Type="nvarchar" MaxLength="20" />
           <Property Name="Sex" Type="int" Nullable="false" />
           <Property Name="Photo" Type="nvarchar" MaxLength="100" />
-          <Property Name="Age" Type="int" Nullable="false" />
           <Property Name="Brithday" Type="datetime" />
           <Property Name="Introduce" Type="nvarchar" MaxLength="200" />
-          <Property Name="Country" Type="nvarchar" MaxLength="50" />
-          <Property Name="Province" Type="int" />
-          <Property Name="City" Type="int" />
           <Property Name="Address" Type="nvarchar" MaxLength="250" />
           <Property Name="LoginIp" Type="nvarchar" MaxLength="50" />
           <Property Name="RoleID" Type="nvarchar" MaxLength="50" />
@@ -103,6 +99,7 @@
           <Property Name="MenuName" Type="nvarchar" MaxLength="50" />
           <Property Name="ParentID" Type="nvarchar" MaxLength="64" />
           <Property Name="LinkUrl" Type="nvarchar" MaxLength="50" />
+          <Property Name="Sort" Type="int" />
           <Property Name="Icon" Type="nvarchar" MaxLength="20" />
           <Property Name="IsShow" Type="bit" />
           <Property Name="CreateUserId" Type="nvarchar" MaxLength="64" />
@@ -110,12 +107,43 @@
           <Property Name="ModifyUserId" Type="nvarchar" MaxLength="64" />
           <Property Name="NodifyDate" Type="datetime" />
         </EntityType>
+        <EntityType Name="SystemRole">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="RoleName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="RoleType" Type="int" />
+          <Property Name="Text1" Type="nvarchar" MaxLength="50" />
+          <Property Name="Description" Type="text" />
+        </EntityType>
+        <EntityType Name="SystemRoleValue">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="RoleId" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="MenuId" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="Action" Type="nvarchar" MaxLength="50" />
+          <Property Name="Text1" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="test">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="date" Type="datetime" />
+        </EntityType>
         <EntityContainer Name="EFDBModelStoreContainer">
           <EntitySet Name="Ad" EntityType="Self.Ad" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Admin_User" EntityType="Self.Admin_User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="News" EntityType="Self.News" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SystemMenu" EntityType="Self.SystemMenu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SystemRole" EntityType="Self.SystemRole" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SystemRoleValue" EntityType="Self.SystemRoleValue" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="test" EntityType="Self.test" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -151,12 +179,8 @@
           <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="Sex" Type="Int32" Nullable="false" />
           <Property Name="Photo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Age" Type="Int32" Nullable="false" />
           <Property Name="Brithday" Type="DateTime" Precision="3" />
           <Property Name="Introduce" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Province" Type="Int32" />
-          <Property Name="City" Type="Int32" />
           <Property Name="Address" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="LoginIp" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="RoleID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -199,6 +223,9 @@
           <EntitySet Name="News" EntityType="Self.News" />
           <EntitySet Name="Product" EntityType="EFDBModel.Product" />
           <EntitySet Name="SystemMenu" EntityType="EFDBModel.SystemMenu" />
+          <EntitySet Name="SystemRole" EntityType="EFDBModel.SystemRole" />
+          <EntitySet Name="test" EntityType="EFDBModel.test" />
+          <EntitySet Name="SystemRoleValue" EntityType="EFDBModel.SystemRoleValue" />
         </EntityContainer>
         <EntityType Name="Product">
           <Key>
@@ -232,6 +259,35 @@
           <Property Name="CreateDate" Type="DateTime" Precision="3" />
           <Property Name="ModifyUserId" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
           <Property Name="NodifyDate" Type="DateTime" Precision="3" />
+          <Property Name="Sort" Type="Int32" />
+        </EntityType>
+        <EntityType Name="SystemRole">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="RoleName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RoleType" Type="Int32" />
+          <Property Name="Text1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="test">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="date" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="SystemRoleValue">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="RoleId" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="MenuId" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="Action" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Text1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -269,12 +325,8 @@
           <ScalarProperty Name="Phone" ColumnName="Phone" />
           <ScalarProperty Name="Sex" ColumnName="Sex" />
           <ScalarProperty Name="Photo" ColumnName="Photo" />
-          <ScalarProperty Name="Age" ColumnName="Age" />
           <ScalarProperty Name="Brithday" ColumnName="Brithday" />
           <ScalarProperty Name="Introduce" ColumnName="Introduce" />
-          <ScalarProperty Name="Country" ColumnName="Country" />
-          <ScalarProperty Name="Province" ColumnName="Province" />
-          <ScalarProperty Name="City" ColumnName="City" />
           <ScalarProperty Name="Address" ColumnName="Address" />
           <ScalarProperty Name="LoginIp" ColumnName="LoginIp" />
           <ScalarProperty Name="RoleID" ColumnName="RoleID" />
@@ -314,37 +366,69 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-          <EntitySetMapping Name="Product">
-            <EntityTypeMapping TypeName="EFDBModel.Product">
-              <MappingFragment StoreEntitySet="Product">
-                <ScalarProperty Name="Text5" ColumnName="Text5" />
-                <ScalarProperty Name="Text4" ColumnName="Text4" />
-                <ScalarProperty Name="Text3" ColumnName="Text3" />
-                <ScalarProperty Name="Text2" ColumnName="Text2" />
-                <ScalarProperty Name="Text1" ColumnName="Text1" />
-                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
-                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
-                <ScalarProperty Name="Content" ColumnName="Content" />
+    <EntitySetMapping Name="Product">
+      <EntityTypeMapping TypeName="IsTypeOf(EFDBModel.Product)">
+        <MappingFragment StoreEntitySet="Product">
+          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+          <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Unit" ColumnName="Unit" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Content" ColumnName="Content" />
+          <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+          <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+          <ScalarProperty Name="Text1" ColumnName="Text1" />
+          <ScalarProperty Name="Text2" ColumnName="Text2" />
+          <ScalarProperty Name="Text3" ColumnName="Text3" />
+          <ScalarProperty Name="Text4" ColumnName="Text4" />
+          <ScalarProperty Name="Text5" ColumnName="Text5" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SystemMenu">
+      <EntityTypeMapping TypeName="IsTypeOf(EFDBModel.SystemMenu)">
+        <MappingFragment StoreEntitySet="SystemMenu">
+          <ScalarProperty Name="Sort" ColumnName="Sort" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="MenuName" ColumnName="MenuName" />
+          <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+          <ScalarProperty Name="LinkUrl" ColumnName="LinkUrl" />
+          <ScalarProperty Name="Icon" ColumnName="Icon" />
+          <ScalarProperty Name="IsShow" ColumnName="IsShow" />
+          <ScalarProperty Name="CreateUserId" ColumnName="CreateUserId" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="ModifyUserId" ColumnName="ModifyUserId" />
+          <ScalarProperty Name="NodifyDate" ColumnName="NodifyDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+          <EntitySetMapping Name="SystemRole">
+            <EntityTypeMapping TypeName="EFDBModel.SystemRole">
+              <MappingFragment StoreEntitySet="SystemRole">
                 <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Unit" ColumnName="Unit" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
-                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="Text1" ColumnName="Text1" />
+                <ScalarProperty Name="RoleType" ColumnName="RoleType" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="SystemMenu">
-            <EntityTypeMapping TypeName="EFDBModel.SystemMenu">
-              <MappingFragment StoreEntitySet="SystemMenu">
-                <ScalarProperty Name="NodifyDate" ColumnName="NodifyDate" />
-                <ScalarProperty Name="ModifyUserId" ColumnName="ModifyUserId" />
-                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-                <ScalarProperty Name="CreateUserId" ColumnName="CreateUserId" />
-                <ScalarProperty Name="IsShow" ColumnName="IsShow" />
-                <ScalarProperty Name="Icon" ColumnName="Icon" />
-                <ScalarProperty Name="LinkUrl" ColumnName="LinkUrl" />
-                <ScalarProperty Name="ParentID" ColumnName="ParentID" />
-                <ScalarProperty Name="MenuName" ColumnName="MenuName" />
+          <EntitySetMapping Name="test">
+            <EntityTypeMapping TypeName="EFDBModel.test">
+              <MappingFragment StoreEntitySet="test">
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SystemRoleValue">
+            <EntityTypeMapping TypeName="EFDBModel.SystemRoleValue">
+              <MappingFragment StoreEntitySet="SystemRoleValue">
+                <ScalarProperty Name="Text1" ColumnName="Text1" />
+                <ScalarProperty Name="Action" ColumnName="Action" />
+                <ScalarProperty Name="MenuId" ColumnName="MenuId" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

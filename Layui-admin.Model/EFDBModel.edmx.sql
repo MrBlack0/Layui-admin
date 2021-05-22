@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 07/03/2019 22:08:54
+-- Date Created: 08/20/2019 20:34:33
 -- Generated from EDMX file: C:\Users\ThinkPad\documents\visual studio 2017\Projects\Layui-admin\Layui-admin.Model\EFDBModel.edmx
 -- --------------------------------------------------
 
@@ -30,6 +30,18 @@ IF OBJECT_ID(N'[dbo].[Admin_User]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[News]', 'U') IS NOT NULL
     DROP TABLE [dbo].[News];
+GO
+IF OBJECT_ID(N'[dbo].[Product]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Product];
+GO
+IF OBJECT_ID(N'[dbo].[SystemMenu]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[SystemMenu];
+GO
+IF OBJECT_ID(N'[dbo].[SystemRole]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[SystemRole];
+GO
+IF OBJECT_ID(N'[dbo].[SystemRoleValue]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[SystemRoleValue];
 GO
 
 -- --------------------------------------------------
@@ -108,10 +120,56 @@ CREATE TABLE [dbo].[News] (
 );
 GO
 
--- Creating table 'ProductSet'
-CREATE TABLE [dbo].[ProductSet] (
-    [Id] int IDENTITY(1,1) NOT NULL,
-    [Name] nvarchar(max)  NOT NULL
+-- Creating table 'Product'
+CREATE TABLE [dbo].[Product] (
+    [ProductID] int IDENTITY(1,1) NOT NULL,
+    [ProductName] nvarchar(50)  NULL,
+    [Price] decimal(18,0)  NULL,
+    [Unit] nvarchar(5)  NULL,
+    [Description] nvarchar(500)  NULL,
+    [Content] varchar(max)  NULL,
+    [CreateTime] datetime  NOT NULL,
+    [UpdateTime] datetime  NULL,
+    [Text1] nvarchar(50)  NULL,
+    [Text2] nvarchar(50)  NULL,
+    [Text3] nvarchar(50)  NULL,
+    [Text4] nvarchar(50)  NULL,
+    [Text5] nvarchar(50)  NULL
+);
+GO
+
+-- Creating table 'SystemMenu'
+CREATE TABLE [dbo].[SystemMenu] (
+    [ID] nvarchar(64)  NOT NULL,
+    [MenuName] nvarchar(50)  NULL,
+    [ParentID] nvarchar(64)  NULL,
+    [LinkUrl] nvarchar(50)  NULL,
+    [Icon] nvarchar(20)  NULL,
+    [IsShow] bit  NULL,
+    [CreateUserId] nvarchar(64)  NULL,
+    [CreateDate] datetime  NULL,
+    [ModifyUserId] nvarchar(64)  NULL,
+    [NodifyDate] datetime  NULL
+);
+GO
+
+-- Creating table 'SystemRole'
+CREATE TABLE [dbo].[SystemRole] (
+    [ID] nvarchar(64)  NOT NULL,
+    [RoleName] nvarchar(50)  NOT NULL,
+    [RoleType] tinyint  NULL,
+    [Text1] nvarchar(50)  NULL,
+    [Description] varchar(max)  NULL
+);
+GO
+
+-- Creating table 'SystemRoleValue'
+CREATE TABLE [dbo].[SystemRoleValue] (
+    [ID] varchar(64)  NOT NULL,
+    [RoleId] varchar(64)  NOT NULL,
+    [NavigationName] nvarchar(50)  NOT NULL,
+    [Action] nvarchar(50)  NULL,
+    [Text1] nvarchar(50)  NULL
 );
 GO
 
@@ -137,10 +195,28 @@ ADD CONSTRAINT [PK_News]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
--- Creating primary key on [Id] in table 'ProductSet'
-ALTER TABLE [dbo].[ProductSet]
-ADD CONSTRAINT [PK_ProductSet]
-    PRIMARY KEY CLUSTERED ([Id] ASC);
+-- Creating primary key on [ProductID] in table 'Product'
+ALTER TABLE [dbo].[Product]
+ADD CONSTRAINT [PK_Product]
+    PRIMARY KEY CLUSTERED ([ProductID] ASC);
+GO
+
+-- Creating primary key on [ID] in table 'SystemMenu'
+ALTER TABLE [dbo].[SystemMenu]
+ADD CONSTRAINT [PK_SystemMenu]
+    PRIMARY KEY CLUSTERED ([ID] ASC);
+GO
+
+-- Creating primary key on [ID] in table 'SystemRole'
+ALTER TABLE [dbo].[SystemRole]
+ADD CONSTRAINT [PK_SystemRole]
+    PRIMARY KEY CLUSTERED ([ID] ASC);
+GO
+
+-- Creating primary key on [ID] in table 'SystemRoleValue'
+ALTER TABLE [dbo].[SystemRoleValue]
+ADD CONSTRAINT [PK_SystemRoleValue]
+    PRIMARY KEY CLUSTERED ([ID] ASC);
 GO
 
 -- --------------------------------------------------

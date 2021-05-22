@@ -10,6 +10,8 @@ namespace Layui_admin.IDAL.IEntityDal
 {
     public interface ISystemMenuDal : IBaseDal<SystemMenu>
     {
-        IQueryable<SystemMenuViewModel> GetSystemMenu(int limit, int page, string menuName, out int count);
+        IQueryable<SystemMenuViewModel> GetSystemMenusByPage(int limit, int page, string menuName, out int count);
+        IQueryable<SystemURoleMenuViewModel> GetSystemMenusByRoleId(string roleid);
+        IQueryable<SystemURoleMenuViewModel> GetSystemAllMenus();
     }
 }

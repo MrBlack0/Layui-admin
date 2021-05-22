@@ -22,5 +22,13 @@ namespace Layui_admin.Factory
         {
             return new SystemMenuDal();
         }
+        public static ISystemRoleDal SystemRoleDalFactory()
+        {
+            return new SystemRoleDal();
+        }
+        public static ISystemRoleValueDal SystemRoleValueDalFactory()
+        {
+            return new SystemRoleValueDal();
+        }
     }
 }

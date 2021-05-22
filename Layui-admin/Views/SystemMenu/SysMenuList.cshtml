@@ -91,13 +91,13 @@
                 //}
                 , cellMinWidth: 80
                 , toolbar: '#toolbarDemo'
-                , title: '菜单列表'
                 , cols: [[
                     { type: 'checkbox' }
                     , { type: 'numbers' }
                     , { field: 'Id', title: 'ID', hide: true }
                     , { field: 'MenuName', title: '菜单名' }
                     , { field: 'Icon', title: '图标' }
+                    , { field: 'LinkUrl', title: '地址' }
                     , { field: 'IsShow', title: '是否显示', width: 110, templet: '#buttonShow' }
                     //, {
                     //    field: 'IsShow', title: '显示', templet: function (d) {
@@ -199,7 +199,7 @@
                         , title: '编辑菜单'
                         , content: "http://" + window.location.host + "/SystemMenu/GetMenuById?id=" + obj.data.ID
                         , maxmin: true
-                        , area: ['400px', '400px']
+                        , area: ['400px', '450px'] //宽,高
                         , offset: 't'
                         , btn: ['确定', '取消']
                         , yes: function (index, layero) {
@@ -246,7 +246,7 @@
                     , title: '添加菜单'
                     , content: "http://" + window.location.host + "/SystemMenu/AddMenu"
                     , maxmin: true
-                    , area: ['400px', '400px']
+                    , area: ['400px', '450px']
                     , offset: 't'
                     , btn: ['确定', '取消']
                     , yes: function (index, layero) {
